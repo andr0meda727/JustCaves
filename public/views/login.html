@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JustCaves - login</title>
+    <link rel="stylesheet" type="text/css" href="public/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="public/styles/login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form class="form" action="\login" method="POST">
+        <div class="header">
+          <h1 id="title">Witaj w JustCaves</h1>
+          <h3>Zaloguj się, aby odkrywać dziuuury :)</h3>
+        </div>
+
+        <div class="usernameInput">
+          <label for="username">Nazwa użytkownika</label>
+          <input name="username" placeholder="Wprowadź swoją nazwę" />
+        </div>
+
+        <div class="passwordInput">
+          <label for="password">Hasło</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Wprowadź swoje hasło"
+          />
+        </div>
+
+        <button type="submit">Zaloguj się</button>
+
+        <div class="register">
+          <p>Nie masz konta?</p>
+          <a href="\register">Zarejestruj się</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
