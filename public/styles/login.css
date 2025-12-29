@@ -42,12 +42,25 @@ body::before {
   border-radius: 20px;
 
   color: white;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.5em;
+}
+
+.form .header {
+  margin: -1em 0 1em;
+}
+
+.form .log-in-btn {
+  margin-top: 2em;
+  border: none;
 }
 
 .container h1,
@@ -92,6 +105,7 @@ input:focus {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  margin-top: -1em;
 }
 
 .register a {
@@ -106,11 +120,18 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 55px;
 
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 2px solid #0e880e23;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  line-height: 1;
 }
 
 .header-spacer {
@@ -121,10 +142,27 @@ header {
   display: flex;
   align-items: center;
   gap: 1em;
+  flex: 2;
+  justify-content: center;
+  height: 100%;
 }
 
 header .log-in {
-  /* margin-left: auto; */
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2em;
+  font-weight: 600;
+}
+
+.log-in a {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+.log-in a:active {
+  color: white;
 }
 
 .log-in-btn {
@@ -132,10 +170,16 @@ header .log-in {
   padding: 1em 1em;
   outline: none;
   border-radius: 8px;
-  color: white;
+  color: #3b3a3a;
   font-size: 1.2rem;
   font-weight: 600;
+  cursor: pointer;
 }
+
+.log-in-btn:hover {
+  background-color: #11ad11;
+}
+
 
 .input-wrapper {
   position: relative;
@@ -146,7 +190,7 @@ header .log-in {
   background: #162c18;
   padding: 1em;
   border: 2px solid #2e6b38;
-  border-radius: 14px;
+  border-radius: 8px;
 
   color: #9ad8a4;
   outline: none;
