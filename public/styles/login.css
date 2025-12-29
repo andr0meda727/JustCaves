@@ -192,12 +192,12 @@ header .log-in {
   border: 2px solid #2e6b38;
   border-radius: 8px;
 
-  color: #9ad8a4;
+  color: var(--font-color);
   outline: none;
 }
 
 .input-wrapper input::placeholder {
-  color: #7fbf8a;
+  color: var(--font-color);
   padding: 2.5em;
 }
 
@@ -212,6 +212,8 @@ header .log-in {
   transform: translateY(-50%);
   width: 22px;
   height: 22px;
-  fill: #7fbf8a;
+  fill: var(--font-color);
   pointer-events: none;
 }
+
+

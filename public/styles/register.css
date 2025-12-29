@@ -1,0 +1,25 @@
+.register-btn {
+  background-color: var(--btn-color);
+  padding: 1em 1em;
+  border-radius: 8px;
+  color: #3b3a3a;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2em;
+  outline: none;
+  border: none;
+}
+
+.register-btn:hover {
+  background-color: #11ad11;
+}
+
+.username-input,
+.email-input,
+.password-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}

@@ -9,7 +9,11 @@ class Routing {
             'controller' => 'SecurityController',
             'action' => 'login'
         ],
-    ]
+        'register' => [
+            'controller' => 'SecurityController',
+            'action' => 'register'
+        ]
+    ];
 
     public static function run(string $path) {
         $urlParts = explode("/", $path);
