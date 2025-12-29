@@ -216,4 +216,33 @@ header .log-in {
   pointer-events: none;
 }
 
+@media (max-width: 800px) {
+  header {
+    display: none;
+  }
+
+  .container {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  body::before {
+    filter: blur(8px);
+    opacity: 0.1;
+  }
+
+  .input-wrapper input {
+    padding: 1.5em 2em;
+  }
+
+  .form > .header {
+    margin-bottom: 3em;
+  }
+
+  div > label {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+}
+
 
