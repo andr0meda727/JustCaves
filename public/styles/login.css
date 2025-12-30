@@ -15,18 +15,6 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("../assets/images/bg-image.webp");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.3;
-  z-index: -1;
-  filter: blur(1px);
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -180,7 +168,6 @@ header .log-in {
   background-color: #11ad11;
 }
 
-
 .input-wrapper {
   position: relative;
 }
@@ -243,5 +230,3 @@ header .log-in {
     font-size: 1.1rem;
   }
 }
-
-

@@ -4,3 +4,15 @@
   --input-color: #1a321a;
   --font-color: #93c893;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../assets/images/bg-image.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1;
+  filter: blur(1px);
+}

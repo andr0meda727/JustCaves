@@ -45,7 +45,12 @@
     <main class="container">
       <h1>Dodaj nową jaskinię</h1>
 
-      <form class="cave-form" action="/addCave" method="POST">
+      <form
+        class="cave-form"
+        action="/addCave"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <div class="form-grid">
           <div class="left-col">
             <div class="input-group">
@@ -84,6 +89,19 @@
                 </p>
                 <span>PNG, JPG (MAX. 10MB)</span>
               </div>
+            </div>
+            <div class="input-group">
+              <label>Region</label>
+              <select name="region_id" class="region-select" required>
+                <option value="" disabled selected>Wybierz region...</option>
+                <?php if(isset($regions)): ?>
+                <?php foreach($regions as $region): ?>
+                <option value="<?= $region['id']; ?>">
+                  <?= $region['name']; ?>
+                </option>
+                <?php endforeach; ?>
+                <?php endif; ?>
+              </select>
             </div>
           </div>
 

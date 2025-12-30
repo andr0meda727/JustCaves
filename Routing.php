@@ -1,6 +1,7 @@
 <?php
 
 require_once 'src/controllers/SecurityController.php';
+require_once 'src/controllers/CavesController.php';
 
 
 class Routing {
@@ -12,6 +13,14 @@ class Routing {
         'register' => [
             'controller' => 'SecurityController',
             'action' => 'register'
+        ],
+        'caves' => [
+            'controller' => 'CavesController',
+            'action' => 'caves'
+        ],
+        'addCave' => [
+            'controller' => 'CavesController',
+            'action' => 'addCave'
         ]
     ];
 

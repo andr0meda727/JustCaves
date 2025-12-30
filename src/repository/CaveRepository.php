@@ -5,6 +5,21 @@ require_once __DIR__ . '/../models/Cave.php';
 
 class CaveRepository extends Repository
 {
+    private static ?CaveRepository $instance = null;
+
+    protected function __construct()
+    {
+        parent::__construct();
+    }
+
+    public static function getInstance(): CaveRepository
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     public function create(Cave $cave): ?Cave
     {
         try {
@@ -116,6 +131,13 @@ class CaveRepository extends Repository
 
         return array_map([$this, 'mapToCave'], $results);
     }
+
+    public function getRegions(): array
+    {
+        $query = "SELECT id, name FROM regions ORDER BY name ASC";
+        return $this->fetchAll($query);
+    }
+
 
     public function countByStatus(string $status): int
     {
