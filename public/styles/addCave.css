@@ -1,0 +1,220 @@
+:root {
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --accent-color: #2ecc71;
+  --text-main: #ffffff;
+  --text-secondary-color: #a0a0a0;
+  --input-border: #2d4a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif, Roboto,
+    sans-serif;
+  background-color: var(--primary-bg-color);
+  background-image: linear-gradient(135deg, #0d1a12 0%, #1a2e23 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+body::before {
+  opacity: 0.1;
+}
+
+.navbar {
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #0e880e23;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.sub-label {
+  color: var(--text-secondary-color);
+  font-size: 0.85rem;
+  margin-top: -0.2rem;
+  margin-bottom: 1rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  background: #122118;
+  border: 1px solid var(--input-color);
+  border-radius: 8px;
+  color: white;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent-color);
+  background: #162a1e;
+}
+
+textarea {
+  height: 150px;
+  resize: none;
+}
+
+.upload-box {
+  border: 2px dashed var(--input-border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  background: #122118;
+}
+
+.upload-box i {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.upload-box p {
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+.upload-box span {
+  color: var(--text-secondary-color);
+  font-size: 0.75rem;
+}
+
+.map-placeholder {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: url("https://images.unsplash.com/photo-1501854140801-50d01674db4e?auto=format&fit=crop&q=80")
+    center/cover;
+  border-radius: 12px;
+  position: relative;
+}
+
+.map-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  border: 3px solid white;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg) translate(50%, -50%);
+}
+
+.coords-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  align-items: center;
+}
+
+.btn-cancel {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-submit {
+  background: var(--btn-color);
+  color: #000;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-submit:hover {
+  transform: scale(1.05);
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  border: 1px solid var(--input-border, #2d4a3a);
+  z-index: 1;
+}
+
+.leaflet-marker-icon {
+  filter: hue-rotate(120deg) brightness(1.2);
+}
+
+.logo-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.logo-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
