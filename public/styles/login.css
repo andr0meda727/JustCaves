@@ -188,7 +188,7 @@ header .log-in {
 .input-wrapper input {
   width: 100%;
   background: #162c18;
-  padding: 1em;
+  padding: 1em 1em 1em 3.5em;
   border: 2px solid #2e6b38;
   border-radius: 8px;
 
@@ -198,7 +198,6 @@ header .log-in {
 
 .input-wrapper input::placeholder {
   color: var(--font-color);
-  padding: 2.5em;
 }
 
 .input-wrapper input:focus {
