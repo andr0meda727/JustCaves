@@ -53,10 +53,21 @@ class CavesController extends AppController {
         }
 
         $userId = $_SESSION['user_id'];
-        $success = $this->caveRepository->markAsVisited($userId, $caveId);
+        $isVisited = $this->caveRepository->isVisited($userId, $caveId);
+
+        if ($isVisited) {
+            $success = $this->caveRepository->unmarkAsVisited($userId, $caveId);
+            $status = 'unmarked';
+        } else {
+            $success = $this->caveRepository->markAsVisited($userId, $caveId);
+            $status = 'marked';
+        }
 
         header('Content-Type: application/json');
-        echo json_encode(['success' => $success]);
+        echo json_encode([
+            'success' => $success,
+            'status' => $status
+        ]);
     }
 
     public function addCave() {

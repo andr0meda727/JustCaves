@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const visitBtn = document.getElementById("visit-btn");
+  const visitText = document.getElementById("visit-text");
 
   if (!visitBtn) return;
 
@@ -18,9 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         if (data && data.success) {
-          visitBtn.classList.add("visited-active");
-          visitBtn.disabled = true;
-          document.getElementById("visit-text").innerText = "Odwiedzona";
+          if (data.status === "marked") {
+            visitBtn.classList.add("visited-active");
+            visitText.innerText = "Odwiedzona";
+          } else {
+            visitBtn.classList.remove("visited-active");
+            visitText.innerText = "Oznacz jako odwiedzoną";
+          }
         }
       })
       .catch((err) => console.error("Error:", err));
