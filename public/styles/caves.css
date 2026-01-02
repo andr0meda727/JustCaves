@@ -139,11 +139,11 @@ body {
 }
 
 .cave-card {
-  background: rgba(45, 66, 47, 0.6);
+  background: #1a321a;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   padding: 15px;
-  margin-right: 1em;
+  margin-right: .5em;
   display: flex;
   align-items: center;
   gap: 15px;

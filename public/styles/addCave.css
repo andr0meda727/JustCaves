@@ -96,18 +96,17 @@ input,
 textarea {
   width: 100%;
   padding: 0.8rem;
-  background: #122118;
   border: 1px solid var(--input-color);
   border-radius: 8px;
   color: white;
   box-sizing: border-box;
   outline: none;
+  background: #1a321a;
 }
 
 input:focus,
 textarea:focus {
   border-color: var(--accent-color);
-  background: #162a1e;
 }
 
 textarea {
@@ -120,7 +119,7 @@ textarea {
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
-  background: #122118;
+  background: #1a321a;
 }
 
 .upload-box i {
@@ -133,6 +132,7 @@ textarea {
   font-size: 0.9rem;
   margin: 5px 0;
 }
+
 .upload-box span {
   color: var(--text-secondary-color);
   font-size: 0.75rem;
@@ -223,7 +223,7 @@ textarea {
 .region-select {
   width: 100%;
   padding: 0.8rem;
-  background: #122118;
+  background: #1a321a;
   border: 1px solid var(--input-border);
   border-radius: 8px;
   color: white;
@@ -241,7 +241,6 @@ textarea {
 }
 
 .region-select option {
-  background: #0d1a12;
   color: white;
 }
 
