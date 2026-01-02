@@ -169,3 +169,11 @@ p {
   cursor: pointer;
   font-weight: bold;
 }
+
+.btn-visited.visited-active {
+  background-color: #2d422f;
+  color: #93c893;
+  border: 1px solid var(--accent-green);
+  cursor: default;
+  opacity: 0.9;
+}
