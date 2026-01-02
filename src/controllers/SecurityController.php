@@ -55,7 +55,7 @@ class SecurityController extends AppController {
             $_SESSION['username'] = $user->getUsername();
             $_SESSION['role_id'] = $user->getRoleId();
 
-            header('Location: /dashboard');
+            header('Location: /caves');
             exit();
         }
     }
