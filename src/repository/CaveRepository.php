@@ -72,6 +72,34 @@ class CaveRepository extends Repository
         return $cave;
     }
 
+    public function findByStatus(string $status, int $limit = 20): array
+    {
+        $query = "SELECT * FROM caves 
+                  WHERE status = :status 
+                  ORDER BY created_at DESC
+                  LIMIT :limit";
+
+        $results = $this->fetchAll($query, [
+            ':status' => $status,
+            ':limit' => $limit
+        ]);
+
+        return array_map([$this, 'mapToCave'], $results);
+    }
+
+    public function isVisited(int $userId, int $caveId): bool {
+        $query = "SELECT 1 FROM public.cave_visits WHERE user_id = :u AND cave_id = :c";
+        $result = $this->fetchOne($query, [':u' => $userId, ':c' => $caveId]);
+        return $result !== null;
+    }
+
+    public function markAsVisited(int $userId, int $caveId): bool {
+        $query = "INSERT INTO public.cave_visits (user_id, cave_id) 
+              VALUES (:u, :c) 
+              ON CONFLICT (user_id, cave_id) DO NOTHING";
+        return $this->execute($query, [':u' => $userId, ':c' => $caveId]);
+    }
+
     public function updateStatus(int $caveId, string $status, int $approvedBy): bool
     {
         $query = "UPDATE caves 
