@@ -5,35 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JustCaves</title>
     <link rel="stylesheet" type="text/css" href="public/styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="public/styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="public/styles/caves.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      defer
+    ></script>
+    <script src="public/scripts/map.js"></script>
   </head>
   <body>
-    <header>
-      <div class="header-spacer"></div>
-      <div class="main-header">
-        <svg
-          width="35"
-          height="28"
-          viewBox="0 0 40 33"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M19.76 7.77563L32.3866 28.875H7.13336L19.76 7.77563ZM19.76 0L0 33H39.52L19.76 0Z"
-            fill="#17CF17"
-          />
-        </svg>
-        <h1>JustCaves</h1>
-      </div>
-      <div>
-        <div class="log-in">
-          <a href="login" class="login-link-btn">Dodaj jaskinię</a>
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo-header">
+          <svg
+            width="35"
+            height="28"
+            viewBox="0 0 40 33"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19.76 7.77563L32.3866 28.875H7.13336L19.76 7.77563ZM19.76 0L0 33H39.52L19.76 0Z"
+              fill="#17CF17"
+            />
+          </svg>
+          <h1><a href="/caves" class="logo-link">JustCaves</a></h1>
         </div>
-        <div class="log-in">
-          <a href="login" class="login-link-btn">Mój profil</a>
-        </div>
+        <ul class="nav-links">
+          <li><a href="#">Mapa</a></li>
+          <li><a href="/addCave">Dodaj jaskinię</a></li>
+          <li><a href="#">Mój profil</a></li>
+          <li class="user-icon"><i class="far fa-user-circle"></i></li>
+        </ul>
       </div>
-    </header>
-    <div class="container"></div>
+    </nav>
+
+    <main class="main-container">
+      <section class="sidebar">
+        <h2 class="section-title">Odkrywaj Jaskinie</h2>
+        <a href="/addCave" class="btn-primary">Dodaj nową jaskinię</a>
+
+        <div class="search-filters">
+          <div class="search-input-wrapper">
+            <input type="text" placeholder="Szukaj jaskini po nazwie..." />
+          </div>
+        </div>
+
+        <div class="caves-list">
+          <?php if(isset($caves)): ?>
+          <?php foreach($caves as $cave): ?>
+          <div
+            class="cave-card"
+            data-lat="<?= $cave->getLatitude() ?>"
+            data-lng="<?= $cave->getLongitude() ?>"
+            onclick="focusCave(<?= $cave->getLatitude() ?>, <?= $cave->getLongitude() ?>)"
+          >
+            <div
+              class="cave-img-mini"
+              style="
+                background-image: url('<?= $cave->getMapImagePath() ? '/public/uploads/maps/'.$cave->getMapImagePath() : '/public/uploads/maps/cave_default.png' ?>');
+              "
+            ></div>
+            <div class="cave-info">
+              <div>
+                <h3><?= $cave->getName() ?></h3>
+                <p>
+                  <?= mb_strimwidth(htmlspecialchars($cave->getDescription()),
+                  0, 100, "...") ?>
+                </p>
+              </div>
+              <button class="details-btn">Zobacz więcej</button>
+            </div>
+          </div>
+          <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+      </section>
+
+      <section class="map-section">
+        <div id="map"></div>
+      </section>
+    </main>
   </body>
 </html>
