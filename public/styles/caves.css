@@ -228,7 +228,7 @@ body {
 }
 
 .details-btn {
-  background-color: var(--accent-green);
+  background-color: var(--btn-color);
   color: white;
   border: none;
   padding: 0.5em 2em;

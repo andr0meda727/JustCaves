@@ -17,9 +17,20 @@ class CavesController extends AppController {
 
 
     public function caves() {
-        $caves = $this->caveRepository->findByStatus('APPROVED'); 
+        $caves = $this->caveRepository->findByStatus('PENDING'); 
 
         return $this->render("caves", ['caves' => $caves]);
+    }
+
+    public function cave(int $id) {
+        $cave = $this->caveRepository->findById($id);
+
+        if (!$cave) {
+            include 'public/views/404.html';
+            return;
+        }
+
+        return $this->render("cave_details", ['cave' => $cave]);
     }
 
     public function addCave() {
