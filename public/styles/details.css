@@ -1,19 +1,14 @@
 :root {
-  --bg-dark: #0a0f0b;
   --panel-overlay: rgba(20, 30, 22, 0.85);
   --accent-green: #17cf17;
   --accent-orange: #f39c12;
   --text-main: #e0e0e0;
-
-  --primary-bg-color: #112111;
-  --btn-color: #17cf17;
-  --input-color: #1a321a;
   --font-color: #93c893;
 }
 
 body {
   margin: 0;
-  background-color: var(--bg-dark);
+  background-color: var(--primary-bg-color);
   color: var(--text-main);
   font-family: "Segoe UI", Roboto, sans-serif;
 }

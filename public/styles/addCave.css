@@ -1,5 +1,4 @@
 :root {
-  --card-bg: rgba(255, 255, 255, 0.05);
   --accent-color: #2ecc71;
   --text-main: #ffffff;
   --text-secondary-color: #a0a0a0;
@@ -17,7 +16,6 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif, Roboto,
     sans-serif;
   background-color: var(--primary-bg-color);
-  background-image: linear-gradient(135deg, #0d1a12 0%, #1a2e23 100%);
   color: var(--text-main);
   min-height: 100vh;
 }
