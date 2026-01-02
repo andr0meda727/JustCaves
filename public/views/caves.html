@@ -48,10 +48,12 @@
         <h2 class="section-title">Odkrywaj Jaskinie</h2>
         <a href="/addCave" class="btn-primary">Dodaj nową jaskinię</a>
 
-        <div class="search-filters">
-          <div class="search-input-wrapper">
-            <input type="text" placeholder="Szukaj jaskini po nazwie..." />
-          </div>
+        <div class="search-input-wrapper">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Szukaj jaskini po nazwie..."
+          />
         </div>
 
         <div class="caves-list">
@@ -59,6 +61,7 @@
           <?php foreach($caves as $cave): ?>
           <div
             class="cave-card"
+            data-name="<?= strtolower(htmlspecialchars($cave->getName())) ?>"
             data-lat="<?= $cave->getLatitude() ?>"
             data-lng="<?= $cave->getLongitude() ?>"
             onclick="focusCave(<?= $cave->getLatitude() ?>, <?= $cave->getLongitude() ?>)"

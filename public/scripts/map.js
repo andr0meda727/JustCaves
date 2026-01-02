@@ -1,5 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const map = L.map("map").setView([52.06, 19.48], 6);
+let map;
+let markers = [];
+
+function initMap() {
+  const mapContainer = document.getElementById("map");
+  if (!mapContainer) return;
+
+  map = L.map("map").setView([52.06, 19.48], 6);
 
   L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
@@ -9,30 +15,48 @@ document.addEventListener("DOMContentLoaded", function () {
   ).addTo(map);
 
   const caveCards = document.querySelectorAll(".cave-card");
-  const markers = [];
 
   caveCards.forEach((card) => {
     const lat = parseFloat(card.dataset.lat);
     const lng = parseFloat(card.dataset.lng);
-    const name = card.querySelector("h3").innerText;
+    const rawName = card.querySelector("h3").innerText;
 
-    if (lat && lng) {
-      const marker = L.marker([lat, lng])
-        .addTo(map)
-        .bindPopup(`<b>${name}</b>`);
-      markers.push(marker);
+    if (!isNaN(lat) && !isNaN(lng)) {
+      const marker = L.marker([lat, lng]).addTo(map);
+      marker.bindPopup(`<b>${rawName}</b>`);
+
+      markers.push({
+        name: card.dataset.name,
+        instance: marker,
+        element: card,
+      });
     }
   });
 
-  window.focusCave = function (lat, lng) {
-    if (lat && lng) {
-      map.flyTo([lat, lng], 14, {
-        duration: 1.5,
-      });
-    }
-  };
+  const searchInput = document.getElementById("search-input");
+  if (searchInput) {
+    searchInput.addEventListener("input", function (e) {
+      const val = e.target.value.toLowerCase();
 
-  setTimeout(() => {
-    map.invalidateSize();
-  }, 200);
-});
+      markers.forEach((item) => {
+        const isVisible = item.name.includes(val);
+
+        item.element.style.display = isVisible ? "flex" : "none";
+
+        if (isVisible) {
+          map.addLayer(item.instance);
+        } else {
+          map.removeLayer(item.instance);
+        }
+      });
+    });
+  }
+}
+
+function focusCave(lat, lng) {
+  if (map && lat && lng) {
+    map.flyTo([lat, lng], 14);
+  }
+}
+
+window.onload = initMap;
