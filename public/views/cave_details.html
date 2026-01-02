@@ -93,14 +93,15 @@
       </div>
 
       <div class="content-right">
-        <button 
-          id="visit-btn" 
-          class="btn-visited <?= $isVisited ? 'visited-active' : '' ?>" 
+        <button
+          id="visit-btn"
+          class="btn-visited <?= $isVisited ? 'visited-active' : '' ?>"
           data-id="<?= $cave->getId() ?>"
-          <?= $isVisited ? 'disabled' : '' ?>
-      >
-          <span id="visit-text"><?= $isVisited ? 'Odwiedzona' : 'Oznacz jako odwiedzoną' ?></span>
-      </button>
+        >
+          <span id="visit-text"
+            ><?= $isVisited ? 'Odwiedzona' : 'Oznacz jako odwiedzoną' ?></span
+          >
+        </button>
 
         <div class="comments-section">
           <h3>Komentarze Użytkowników</h3>

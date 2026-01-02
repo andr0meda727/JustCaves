@@ -177,3 +177,8 @@ p {
   cursor: default;
   opacity: 0.9;
 }
+
+.btn-visited.visited-active:hover {
+  background-color: #3d1a1a;
+  border-color: #ff4444;
+}
