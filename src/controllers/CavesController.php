@@ -23,6 +23,7 @@ class CavesController extends AppController {
     }
 
     public function cave(int $id) {
+        session_start();
         $cave = $this->caveRepository->findById($id);
 
         if (!$cave) {
@@ -30,7 +31,32 @@ class CavesController extends AppController {
             return;
         }
 
-        return $this->render("cave_details", ['cave' => $cave]);
+        $isVisited = false;
+
+        if (isset($_SESSION['user_id'])) {
+            $isVisited = $this->caveRepository->isVisited($_SESSION['user_id'], $id);
+        }
+
+        return $this->render("cave_details", [
+            'cave' => $cave, 
+            'isVisited' => $isVisited
+        ]);
+    }
+
+    public function visit(int $caveId) {
+        session_start();
+
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Musisz byc zalogowany']);
+            return;
+        }
+
+        $userId = $_SESSION['user_id'];
+        $success = $this->caveRepository->markAsVisited($userId, $caveId);
+
+        header('Content-Type: application/json');
+        echo json_encode(['success' => $success]);
     }
 
     public function addCave() {
