@@ -22,6 +22,10 @@ class Routing {
             'controller' => 'CavesController',
             'action' => 'cave'
         ],
+        'visit' => [
+            'controller' => 'CavesController',
+            'action' => 'visit'
+        ],
         'addCave' => [
             'controller' => 'CavesController',
             'action' => 'addCave'
