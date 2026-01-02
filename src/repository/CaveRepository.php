@@ -56,36 +56,20 @@ class CaveRepository extends Repository
 
     public function findById(int $id): ?Cave
     {
-        $query = "SELECT * FROM caves WHERE id = :id";
+        $query = "SELECT c.*, r.name as region_name 
+                  FROM caves c 
+                  LEFT JOIN regions r ON c.region_id = r.id 
+                  WHERE c.id = :id";
         $result = $this->fetchOne($query, [':id' => $id]);
         
-        return $result ? $this->mapToCave($result) : null;
-    }
+        if (!$result) return null;
 
-    public function findByStatus(string $status, int $limit = 20): array
-    {
-        $query = "SELECT * FROM caves 
-                  WHERE status = :status 
-                  ORDER BY created_at DESC
-                  LIMIT :limit";
-
-        $results = $this->fetchAll($query, [
-            ':status' => $status,
-            ':limit' => $limit
-        ]);
-
-        return array_map([$this, 'mapToCave'], $results);
-    }
-
-    public function findByRegion(int $regionId): array
-    {
-        $query = "SELECT * FROM caves 
-                  WHERE region_id = :region_id 
-                  AND status = 'APPROVED'
-                  ORDER BY name";
-
-        $results = $this->fetchAll($query, [':region_id' => $regionId]);
-        return array_map([$this, 'mapToCave'], $results);
+        $cave = $this->mapToCave($result);
+        if (method_exists($cave, 'setRegionName')) {
+            $cave->setRegionName($result['region_name'] ?? 'Nieznany');
+        }
+        
+        return $cave;
     }
 
     public function updateStatus(int $caveId, string $status, int $approvedBy): bool
@@ -101,35 +85,6 @@ class CaveRepository extends Repository
             ':approved_by' => $approvedBy,
             ':id' => $caveId
         ]);
-    }
-
-    public function searchByName(string $searchTerm): array
-    {
-        $query = "SELECT * FROM caves 
-                  WHERE name ILIKE :search 
-                  AND status = 'APPROVED'
-                  ORDER BY name
-                  LIMIT 50";
-
-        $results = $this->fetchAll($query, [
-            ':search' => "%{$searchTerm}%"
-        ]);
-
-        return array_map([$this, 'mapToCave'], $results);
-    }
-
-    public function getCavesWithHighDifficulty(float $minDifficulty = 7.0): array
-    {
-        $query = "SELECT * FROM caves 
-                  WHERE difficulty_avg >= :min_difficulty 
-                  AND status = 'APPROVED'
-                  ORDER BY difficulty_avg DESC";
-
-        $results = $this->fetchAll($query, [
-            ':min_difficulty' => $minDifficulty
-        ]);
-
-        return array_map([$this, 'mapToCave'], $results);
     }
 
     public function getRegions(): array
