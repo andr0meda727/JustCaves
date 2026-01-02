@@ -100,6 +100,11 @@ class CaveRepository extends Repository
         return $this->execute($query, [':u' => $userId, ':c' => $caveId]);
     }
 
+    public function unmarkAsVisited(int $userId, int $caveId): bool {
+        $query = "DELETE FROM public.cave_visits WHERE user_id = :u AND cave_id = :c";
+        return $this->execute($query, [':u' => $userId, ':c' => $caveId]);
+    }
+
     public function updateStatus(int $caveId, string $status, int $approvedBy): bool
     {
         $query = "UPDATE caves 
