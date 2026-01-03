@@ -3,6 +3,8 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/Cave.php';
 require_once __DIR__ . '/../repository/CaveRepository.php';
+require_once __DIR__ . '/../repository/CommentRepository.php';
+
 
 class CavesController extends AppController {
     const MAX_FILE_SIZE = 1024 * 1024 * 10; // 10MB
@@ -10,11 +12,12 @@ class CavesController extends AppController {
     const UPLOAD_DIRECTORY = '/app/public/uploads/maps/';
 
     private CaveRepository $caveRepository;
+    private CommentRepository $commentRepository;
 
     public function __construct() {
         $this->caveRepository = CaveRepository::getInstance();
+        $this->commentRepository = CommentRepository::getInstance();
     }
-
 
     public function caves() {
         $caves = $this->caveRepository->findByStatus('PENDING'); 
@@ -37,10 +40,37 @@ class CavesController extends AppController {
             $isVisited = $this->caveRepository->isVisited($_SESSION['user_id'], $id);
         }
 
+        $comments = $this->commentRepository->getCommentsByCaveId($id);
+
         return $this->render("cave_details", [
             'cave' => $cave, 
-            'isVisited' => $isVisited
+            'isVisited' => $isVisited,
+            'comments' => $comments
         ]);
+    }
+
+    public function addComment() {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            return;
+        }
+
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            $caveId = (int)$decoded['caveId'];
+            $text = htmlspecialchars($decoded['content']);
+
+            if (!empty($text)) {
+                $success = $this->commentRepository->addComment($_SESSION['user_id'], $caveId, $text);
+                echo json_encode(['success' => $success, 'username' => $_SESSION['username'] ?? 'Ty']);
+                return;
+            }
+        }
+        http_response_code(400);
     }
 
     public function visit(int $caveId) {
