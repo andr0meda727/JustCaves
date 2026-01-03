@@ -14,6 +14,10 @@ class Routing {
             'controller' => 'SecurityController',
             'action' => 'register'
         ],
+        'logout' => [
+            'controller' => 'SecurityController',
+            'action' => 'logout'
+        ],
         'caves' => [
             'controller' => 'CavesController',
             'action' => 'caves'
