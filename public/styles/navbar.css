@@ -11,7 +11,7 @@
 }
 
 .nav-container {
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   display: flex;
   justify-content: space-between;
@@ -102,7 +102,7 @@
 
   .hamburger-menu {
     display: flex;
-    margin: 0;
+    margin: 0 0 0 1em;
     z-index: 10;
   }
 

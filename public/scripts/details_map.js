@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const mapContainer = document.getElementById("map");
+  const toggleBtn = document.getElementById("toggle-map-btn");
 
   if (!mapContainer) return;
 
@@ -22,4 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
     .addTo(smallMap)
     .bindPopup(`<b>${caveName}</b>`)
     .openPopup();
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", function () {
+      mapContainer.classList.toggle("active");
+
+      if (mapContainer.classList.contains("active")) {
+        toggleBtn.innerText = "Zamknij mapę";
+
+        setTimeout(() => {
+          smallMap.invalidateSize();
+        }, 100);
+      } else {
+        toggleBtn.innerText = "Otwórz mapę";
+      }
+    });
+  }
+
+  smallMap.invalidateSize();
 });

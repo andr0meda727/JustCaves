@@ -28,6 +28,10 @@ body {
   gap: 30px;
 }
 
+.mobile-map-toggle {
+  display: none;
+}
+
 .cave-header h1 {
   font-size: 3rem;
   margin: 0;
@@ -204,6 +208,29 @@ p {
     padding: 0 15px;
     align-items: center;
     width: 90%;
+  }
+
+  .mobile-map-toggle {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--accent-green);
+    color: var(--font-color);
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .location-map #map {
+    display: none;
+    height: 250px;
+    margin-bottom: 20px;
+  }
+
+  .location-map #map.active {
+    display: block;
   }
 
   .content-left {
