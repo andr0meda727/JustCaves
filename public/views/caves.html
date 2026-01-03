@@ -15,11 +15,18 @@
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       defer
     ></script>
-    <script src="public/scripts/map.js"></script>
+    <script src="public/scripts/map.js" defer></script>
+    <script src="public/scripts/navbar.js" defer></script>
   </head>
   <body>
     <nav class="navbar">
       <div class="nav-container">
+        <div class="hamburger-menu" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
         <div class="logo-header">
           <svg
             width="35"
@@ -35,8 +42,9 @@
           </svg>
           <h1><a href="/caves" class="logo-link">JustCaves</a></h1>
         </div>
-        <ul class="nav-links">
-          <li><a href="#">Mapa</a></li>
+
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="/caves">Mapa</a></li>
           <li><a href="/addCave">Dodaj jaskinię</a></li>
           <li><a href="#">Mój profil</a></li>
           <svg
