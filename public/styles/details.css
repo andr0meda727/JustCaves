@@ -182,3 +182,16 @@ p {
   background-color: #3d1a1a;
   border-color: #ff4444;
 }
+
+#no-comments {
+  margin: 1em 0 0.5em;
+}
+
+.comment-date {
+  color: #7c7c7c;
+}
+
+.comment-body > p {
+  color: #d4d4d4;
+  margin: 0.25em 0;
+}
