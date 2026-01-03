@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JustCaves - zarejestruj się</title>
+    <link rel="stylesheet" type="text/css" href="public/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="public/styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="public/styles/register.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-spacer"></div>
+      <div class="main-header">
+        <svg
+          width="35"
+          height="28"
+          viewBox="0 0 40 33"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19.76 7.77563L32.3866 28.875H7.13336L19.76 7.77563ZM19.76 0L0 33H39.52L19.76 0Z"
+            fill="#17CF17"
+          />
+        </svg>
+        <h1>JustCaves</h1>
+      </div>
+      <div class="log-in">
+        <a href="login" class="login-link-btn">Zaloguj się</a>
+      </div>
+    </header>
+    <div class="container">
+      <form class="form" action="\register" method="POST">
+        <div class="header">
+          <h1 id="title">Witaj w JustCaves</h1>
+          <h3>Zarejestruj się, aby odkrywać dziuuury :)</h3>
+        </div>
+
+        <div class="username-input">
+          <label for="username">Nazwa użytkownika</label>
+          <div class="input-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+              class="input-icon"
+            >
+              <path
+                d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"
+              />
+            </svg>
+            <input name="username" placeholder="Wprowadź swoją nazwę" />
+          </div>
+        </div>
+
+        <div class="email-input">
+          <label for="email">Email</label>
+          <div class="input-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+              class="input-icon"
+            >
+              <path
+                d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"
+              />
+            </svg>
+            <input name="email" placeholder="Wprowadź swój email" />
+          </div>
+        </div>
+
+        <div class="password-input">
+          <label for="password1">Hasło</label>
+          <div class="input-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+              class="input-icon"
+            >
+              <path
+                d="M240-640h360v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85h-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640Zm0 480h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Z"
+              />
+            </svg>
+            <input
+              name="password1"
+              type="password"
+              placeholder="Wprowadź swoje hasło"
+            />
+          </div>
+        </div>
+
+        <div class="password-input">
+          <label for="password2">Wprowadź ponownie hasło</label>
+          <div class="input-wrapper">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+              class="input-icon"
+            >
+              <path
+                d="M240-640h360v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85h-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640Zm0 480h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM240-160v-400 400Z"
+              />
+            </svg>
+            <input
+              name="password2"
+              type="password"
+              placeholder="Wprowadź ponownie hasło"
+            />
+          </div>
+        </div>
+
+        <button class="register-btn" type="submit">Zarejestruj się</button>
+      </form>
+    </div>
+  </body>
+</html>

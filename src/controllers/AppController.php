@@ -19,16 +19,23 @@ class AppController {
         $output = "";
                  
         if(file_exists($templatePath)){
-            // ['items' => $cards]
             extract($variables);
-            // $items = [ [id=> 1], [id=>2]]
+
             ob_start();
             include $templatePath;
             $output = ob_get_clean();
         } else {
-            ob_start();
-            include $templatePath404;
-            $output = ob_get_clean();
+            $htmlPath = 'public/views/'. $template.'.php';
+            if (file_exists($htmlPath)) {
+                extract($variables);
+                ob_start();
+                include $htmlPath;
+                $output = ob_get_clean();
+            } else {
+                ob_start();
+                include 'public/views/404.html';
+                $output = ob_get_clean();
+            }
         }
         echo $output;
     }
