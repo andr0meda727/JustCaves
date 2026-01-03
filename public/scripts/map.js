@@ -59,4 +59,27 @@ function focusCave(lat, lng) {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const toggleBtn = document.getElementById("toggle-map-btn");
+  const mapSection = document.querySelector(".map-section");
+
+  if (toggleBtn && mapSection) {
+    toggleBtn.addEventListener("click", function () {
+      mapSection.classList.toggle("active");
+
+      if (mapSection.classList.contains("active")) {
+        toggleBtn.innerText = "Zamknij mapę";
+
+        if (map) {
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 100);
+        }
+      } else {
+        toggleBtn.innerText = "Otwórz mapę";
+      }
+    });
+  }
+});
+
 window.onload = initMap;
