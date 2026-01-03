@@ -15,6 +15,7 @@ body {
 
 .details-container {
   display: flex;
+  width: 90%;
   max-width: 1200px;
   margin: 40px auto;
   gap: 40px;

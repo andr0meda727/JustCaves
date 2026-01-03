@@ -102,7 +102,6 @@
 
   .hamburger-menu {
     display: flex;
-    margin: 0 0 0 1em;
     z-index: 10;
   }
 
@@ -147,5 +146,20 @@
   }
   .hamburger-menu.open span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .logo-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .logo-header svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hamburger-menu span {
+    height: 2px;
   }
 }
