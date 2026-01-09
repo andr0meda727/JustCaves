@@ -98,7 +98,7 @@ p {
 
 .btn-visited {
   background-color: var(--accent-orange);
-  color: white;
+  color: #2e2e2e;
   border: none;
   padding: 15px;
   border-radius: 10px;
@@ -166,7 +166,7 @@ p {
 
 .btn-comment {
   background: var(--accent-green);
-  color: white;
+  color: #2e2e2e;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;

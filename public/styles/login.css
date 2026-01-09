@@ -9,8 +9,7 @@ body {
   background-color: var(--primary-bg-color);
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -28,6 +27,7 @@ body {
   padding: 3rem 2rem;
   gap: 2em;
   border-radius: 20px;
+  margin: auto;
 
   color: white;
 
@@ -102,57 +102,6 @@ input:focus {
   text-decoration: none;
 }
 
-header {
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 55px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid #0e880e23;
-}
-
-header h1 {
-  font-size: 1.8rem;
-  margin: 0;
-  line-height: 1;
-}
-
-.header-spacer {
-  flex: 1;
-}
-
-.main-header {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  flex: 2;
-  justify-content: center;
-  height: 100%;
-}
-
-header .log-in {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 2em;
-  font-weight: 600;
-}
-
-.log-in a {
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-}
-
-.log-in a:active {
-  color: white;
-}
-
 .log-in-btn {
   background-color: var(--btn-color);
   padding: 1em 1em;
@@ -207,6 +156,19 @@ header .log-in {
     display: none;
   }
 
+  .header h1 {
+    line-height: 1.1;
+    margin-bottom: 0.25em;
+  }
+
+  .username-input {
+    margin-top: -1.5em;
+  }
+
+  .input-wrapper input {
+    padding: 1.5em 1em 1.5em 3.5em;
+  }
+
   .container {
     background-color: transparent;
     box-shadow: none;
@@ -215,10 +177,6 @@ header .log-in {
   body::before {
     filter: blur(8px);
     opacity: 0.1;
-  }
-
-  .input-wrapper input {
-    padding: 1.5em 2em;
   }
 
   .form > .header {

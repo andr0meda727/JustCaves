@@ -20,9 +20,10 @@ body {
 
 .main-container {
   display: flex;
-  padding: 20px;
+  padding: 20px 0;
   gap: 20px;
   width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
   height: calc(100vh - 80px);
   align-items: stretch;
