@@ -65,7 +65,7 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container <?= isset($registered) ? 'just-registered' : '' ?>">
       <form class="form" action="\login" method="POST">
         <div class="header">
           <h1 id="title">Witaj w JustCaves</h1>
@@ -115,6 +115,12 @@
         </div>
 
         <div class="messages">
+            <?php if(isset($success)): ?>
+                <div class="alert alert-success">
+                    <?= htmlspecialchars($success) ?>
+                </div>
+            <?php endif; ?>
+            
             <?php if(isset($error)): ?>
                 <div class="alert alert-danger">
                     <?= htmlspecialchars($error) ?>
