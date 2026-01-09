@@ -3,7 +3,7 @@
 }
 
 .navbar {
-  padding: 1rem 2cap;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: center;
   border-bottom: 2px solid #0e880e23;
@@ -26,18 +26,13 @@
   gap: 1.5rem;
   align-items: center;
   margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
   color: white;
   font-weight: 400;
-}
-
-.nav-links > svg {
-  margin-left: -0.8em;
-  position: relative;
-  top: 1px;
 }
 
 .logo-header {
@@ -76,6 +71,19 @@
   height: 3px;
   background-color: var(--accent-green);
   transition: all 0.3s ease;
+}
+
+.nav-icons-container {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+  margin-left: -0.8em;
+}
+
+.nav-icons-container a {
+  display: flex;
+  align-items: center;
+  margin-top: 0.1em;
 }
 
 @media (max-width: 768px) {
