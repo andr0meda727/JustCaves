@@ -46,10 +46,6 @@ class SecurityController extends AppController {
         }
 
         if ($user && $isPasswordValid) {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-
             session_regenerate_id(true);
 
             $_SESSION['user_id'] = $user->getId();
@@ -177,7 +173,6 @@ class SecurityController extends AppController {
     }
 
     public function logout() {
-        session_start();
         session_unset();
         session_destroy();
         

@@ -20,13 +20,12 @@ class CavesController extends AppController {
     }
 
     public function caves() {
-        $caves = $this->caveRepository->findByStatus('PENDING'); 
+        $caves = $this->caveRepository->findByStatus('PENDING'); // approved
 
         return $this->render("caves", ['caves' => $caves]);
     }
 
     public function cave(int $id) {
-        session_start();
         $cave = $this->caveRepository->findById($id);
 
         if (!$cave) {
@@ -50,7 +49,6 @@ class CavesController extends AppController {
     }
 
     public function addComment() {
-        session_start();
         if (!isset($_SESSION['user_id'])) {
             http_response_code(401);
             return;
@@ -74,8 +72,6 @@ class CavesController extends AppController {
     }
 
     public function visit(int $caveId) {
-        session_start();
-
         if (!isset($_SESSION['user_id'])) {
             http_response_code(401);
             echo json_encode(['error' => 'Musisz byc zalogowany']);
@@ -101,7 +97,6 @@ class CavesController extends AppController {
     }
 
     public function addCave() {
-        session_start();
         if (!isset($_SESSION['user_id'])) {
             header('Location: /login');
             exit();
