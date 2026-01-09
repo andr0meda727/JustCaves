@@ -46,6 +46,10 @@ body {
   margin: -1em 0 1em;
 }
 
+.nav-container {
+  width: 60%;
+}
+
 .form .log-in-btn {
   margin-top: 2em;
   border: none;
@@ -186,5 +190,9 @@ input:focus {
   div > label {
     font-weight: 600;
     font-size: 1.1rem;
+  }
+
+  .nav-container {
+    width: 100%;
   }
 }

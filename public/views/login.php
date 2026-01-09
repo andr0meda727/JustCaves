@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JustCaves - zaloguj się</title>
     <link rel="stylesheet" type="text/css" href="public/styles/main.css" />
+    <link rel="stylesheet" href="public/styles/navbar.css" >
     <link rel="stylesheet" type="text/css" href="public/styles/login.css" />
-    <link rel="stylesheet" href="public/styles/navbar.css">
     <script src="public/scripts/navbar.js" defer></script>
   </head>
   <body>
@@ -18,7 +18,7 @@
     ?>
 
     <nav class="navbar">
-      <div class="nav-container" style="width: 60%;">
+      <div class="nav-container">
         <div class="hamburger-menu" id="hamburger">
           <span></span>
           <span></span>
@@ -61,7 +61,6 @@
 
           <?php else: ?>
             <li><a href="/register">Zarejestruj się</a></li>
-            <li><a href="/login">Zaloguj się</a></li>
           <?php endif; ?>
         </ul>
       </div>
