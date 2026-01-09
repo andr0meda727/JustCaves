@@ -115,7 +115,8 @@ class SecurityController extends AppController {
 
         // Redirect to login with success message
         return $this->render("login", [
-            "success" => "Konto zostało utworzone! Możesz się teraz zalogować."
+            "success" => "Konto zostało utworzone! Możesz się teraz zalogować.",
+            "registered" => true
         ]);
     }
 
