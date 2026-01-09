@@ -156,6 +156,16 @@
           </div>
         </div>
 
+        <div class="messages">
+            <?php if (isset($errors)): ?>
+              <?php foreach($errors as $error): ?>
+                <div class="alert alert-danger" style="margin-bottom: 5px;">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+
         <button class="register-btn" type="submit">Zarejestruj się</button>
       </form>
     </div>

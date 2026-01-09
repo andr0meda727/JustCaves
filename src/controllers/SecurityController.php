@@ -159,7 +159,7 @@ class SecurityController extends AppController {
         }
 
         if (strlen($email) > 100) {
-            $errors[] = "Nieprawidłowy email";
+            $errors[] = "Email nie może przekraczać 100 znaków";
         }
 
 

@@ -51,7 +51,6 @@ body {
 }
 
 .form .log-in-btn {
-  margin-top: 2em;
   border: none;
 }
 
@@ -153,6 +152,29 @@ input:focus {
   height: 22px;
   fill: var(--font-color);
   pointer-events: none;
+}
+
+.messages {
+  width: 100%;
+}
+
+.alert {
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.alert-danger {
+  background-color: rgba(255, 68, 68, 0.15);
+  color: #ff4444;
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.alert-success {
+  background-color: rgba(23, 207, 23, 0.15);
+  color: #17cf17;
+  border: 1px solid rgba(23, 207, 23, 0.3);
 }
 
 @media (max-width: 800px) {
