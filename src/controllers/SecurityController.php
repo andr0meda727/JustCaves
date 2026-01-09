@@ -35,8 +35,9 @@ class SecurityController extends AppController {
             ]);
         }
 
-        // Verify password
-        if (!password_verify($password, $user->getPasswordHash())) {
+        $isPasswordValid = password_verify($password, $user->getPasswordHash());
+
+        if (!$isPasswordValid) {
             sleep(1);
 
             return $this->render("login", [
@@ -44,7 +45,7 @@ class SecurityController extends AppController {
             ]);
         }
 
-        if ($user && password_verify($password, $user->getPasswordHash())) {
+        if ($user && $isPasswordValid) {
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
@@ -84,7 +85,7 @@ class SecurityController extends AppController {
         // Check if user already exists
         if ($this->userRepository->usernameExists($username)) {
             return $this->render("register", [
-                "errors" => ["Invalid username or email"],
+                "errors" => ["Nieprawidłowa nazwa użytkownika lub email"],
                 "username" => $username,
                 "email" => $email
             ]);
@@ -92,7 +93,7 @@ class SecurityController extends AppController {
 
         if ($this->userRepository->emailExists($email)) {
             return $this->render("register", [
-                "errors" => ["Invalid username or email"],
+                "errors" => ["Nieprawidłowa nazwa użytkownika lub email"],
                 "username" => $username,
                 "email" => $email
             ]);
