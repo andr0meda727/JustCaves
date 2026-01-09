@@ -114,6 +114,14 @@
           </div>
         </div>
 
+        <div class="messages">
+            <?php if(isset($error)): ?>
+                <div class="alert alert-danger">
+                    <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
         <button class="log-in-btn" type="submit">Zaloguj się</button>
 
         <div class="register">
