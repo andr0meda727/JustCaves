@@ -2,6 +2,7 @@
 
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/CavesController.php';
+require_once 'src/controllers/AdminController.php';
 
 
 class Routing {

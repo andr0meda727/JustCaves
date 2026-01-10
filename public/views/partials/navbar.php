@@ -1,5 +1,6 @@
 <?php
     $isLoggedIn = isset($_SESSION['user_id']);
+    $isAdmin = isset($_SESSION['user_id']) && $_SESSION['role_id'] == 3;
     $currentPage = $_SERVER['REQUEST_URI'];
 ?>
 
@@ -32,9 +33,17 @@
 
           <?php if ($isLoggedIn): ?>
           <li><a href="/addCave">Dodaj jaskinię</a></li>
-          <li><a href="/profile">Mój profil</a></li>
+
+          <?php if (!$isAdmin): ?>
+            <li><a href="/profile">Mój profil</a></li>
+          <?php endif; ?>
+
+          <?php if ($isAdmin): ?>
+            <li><a href="/admin" class="admin-link">Panel Administratora</a></li>
+          <?php endif; ?>
 
           <li class="nav-icons-container">
+          <?php if (!$isAdmin): ?>
             <a href="/profile" title="Mój profil">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,6 +57,8 @@
                 />
               </svg>
             </a>
+          <?php endif; ?>
+
 
             <a href="/logout" title="Wyloguj się" class="logout-icon">
               <svg
