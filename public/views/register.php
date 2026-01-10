@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="public/styles/register.css" />
     <link rel="stylesheet" href="public/styles/navbar.css" />
     <link rel="stylesheet" type="text/css" href="public/styles/login.css" />
+    <script src="public/scripts/navbar.js" defer></script>
   </head>
   <body>
     <?php include 'public/views/partials/navbar.php' ?>
