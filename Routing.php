@@ -41,6 +41,22 @@ class Routing {
         'rateCave' => [
             'controller' => 'CavesController',
             'action' => 'rateCave'
+        ],
+        'admin' => [
+            'controller' => 'AdminController',
+            'action' => 'dashboard'
+        ],
+        'admin-approve' => [
+            'controller' => 'AdminController',
+            'action' => 'approveCave'
+        ],
+        'admin-reject' => [
+            'controller' => 'AdminController',
+            'action' => 'rejectCave'
+        ],
+        'admin-delete' => [
+            'controller' => 'AdminController',
+            'action' => 'deleteCave'
         ]
     ];
 
