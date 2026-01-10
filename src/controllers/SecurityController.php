@@ -13,7 +13,7 @@ class SecurityController extends AppController {
 
     public function login() {
         if ($this->isGet()) {
-            return $this->render("login");
+            return $this->render("login/login");
         }
 
         $username = $_POST["username"] ?? '';
@@ -21,7 +21,7 @@ class SecurityController extends AppController {
 
         // Validation
         if (empty($username) || empty($password)) {
-            return $this->render("login", [
+            return $this->render("login/login", [
                 "error" => "Wszystkie pola są wymagane"
             ]);
         }
@@ -30,7 +30,7 @@ class SecurityController extends AppController {
         $user = $this->userRepository->findByUsername($username);
 
         if (!$user) {
-            return $this->render("login", [
+            return $this->render("login/login", [
                 "error" => "Nieprawidłowa nazwa użytkownika lub hasło"
             ]);
         }
@@ -40,7 +40,7 @@ class SecurityController extends AppController {
         if (!$isPasswordValid) {
             sleep(1);
 
-            return $this->render("login", [
+            return $this->render("login/login", [
                 "error" => "Nieprawidłowa nazwa użytkownika lub hasło"
             ]);
         }
@@ -59,7 +59,7 @@ class SecurityController extends AppController {
 
     public function register() {
         if ($this->isGet()) {
-            return $this->render("register");
+            return $this->render("login/register");
         }
 
         $username = $_POST["username"] ?? '';
@@ -71,7 +71,7 @@ class SecurityController extends AppController {
         $errors = $this->validateRegistration($username, $email, $password1, $password2);
 
         if (!empty($errors)) {
-            return $this->render("register", [
+            return $this->render("login/register", [
                 "errors" => $errors,
                 "username" => $username,
                 "email" => $email
@@ -80,7 +80,7 @@ class SecurityController extends AppController {
 
         // Check if user already exists
         if ($this->userRepository->usernameExists($username)) {
-            return $this->render("register", [
+            return $this->render("login/register", [
                 "errors" => ["Nieprawidłowa nazwa użytkownika lub email"],
                 "username" => $username,
                 "email" => $email
@@ -88,7 +88,7 @@ class SecurityController extends AppController {
         }
 
         if ($this->userRepository->emailExists($email)) {
-            return $this->render("register", [
+            return $this->render("login/register", [
                 "errors" => ["Nieprawidłowa nazwa użytkownika lub email"],
                 "username" => $username,
                 "email" => $email
@@ -110,7 +110,7 @@ class SecurityController extends AppController {
         }
 
         // Redirect to login with success message
-        return $this->render("login", [
+        return $this->render("login/login", [
             "success" => "Konto zostało utworzone! Możesz się teraz zalogować.",
             "registered" => true
         ]);

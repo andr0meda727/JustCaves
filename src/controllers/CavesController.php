@@ -22,7 +22,7 @@ class CavesController extends AppController {
     public function caves() {
         $caves = $this->caveRepository->findByStatus('PENDING'); // approved
 
-        return $this->render("caves", ['caves' => $caves]);
+        return $this->render("caves/caves", ['caves' => $caves]);
     }
 
     public function cave(int $caveId) {
@@ -44,7 +44,7 @@ class CavesController extends AppController {
 
         $comments = $this->commentRepository->getCommentsByCaveId($caveId);
 
-        return $this->render("cave_details", [
+        return $this->render("caves/cave_details", [
             'cave' => $cave, 
             'isVisited' => $isVisited,
             'comments' => $comments,
@@ -128,7 +128,7 @@ class CavesController extends AppController {
 
         if ($this->isGet()) {
             $regions = $this->caveRepository->getRegions();
-            return $this->render("addCave", ['regions' => $regions]);
+            return $this->render("caves/addCave", ['regions' => $regions]);
         }
 
         $name = $_POST['name'] ?? '';
@@ -139,7 +139,7 @@ class CavesController extends AppController {
         $regionId = isset($_POST['region_id']) ? (int)$_POST['region_id'] : null;
 
         if (empty($name) || empty($description) || !$regionId) {
-            return $this->render("addCave", ['errors' => ['Wszystkie pola, w tym region, są wymagane']]);
+            return $this->render("caves/addCave", ['errors' => ['Wszystkie pola, w tym region, są wymagane']]);
         }
 
         $imagePath = null;
@@ -147,7 +147,7 @@ class CavesController extends AppController {
             if ($this->validateFile($_FILES['map_image'])) {
                 $imagePath = $this->saveFile($_FILES['map_image']);
             } else {
-                return $this->render("addCave", ['errors' => ['Nieprawidłowy plik graficzny']]);
+                return $this->render("caves/addCave", ['errors' => ['Nieprawidłowy plik graficzny']]);
             }
         }
 
@@ -161,7 +161,7 @@ class CavesController extends AppController {
             exit();
         }
 
-        return $this->render("addCave", ['errors' => ['Wystąpił błąd podczas zapisu w bazie danych']]);
+        return $this->render("caves/addCave", ['errors' => ['Wystąpił błąd podczas zapisu w bazie danych']]);
     }
 
     private function validateFile(array $file): bool {
