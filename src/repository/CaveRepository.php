@@ -105,6 +105,35 @@ class CaveRepository extends Repository
         return $this->execute($query, [':u' => $userId, ':c' => $caveId]);
     }
 
+    public function setCaveRating(int $userId, int $caveId, int $score): bool {
+        $query = "
+            INSERT INTO public.cave_ratings (user_id, cave_id, difficulty_score)
+            VALUES (:user_id, :cave_id, :score)
+            ON CONFLICT (user_id, cave_id) 
+            DO UPDATE SET difficulty_score = EXCLUDED.difficulty_score
+        ";
+
+        return $this->execute($query, [
+            ':user_id' => $userId,
+            ':cave_id' => $caveId,
+            ':score' => $score
+        ]);
+    }
+
+    public function getUserRating(int $userId, int $caveId): ?int 
+    {
+        $query = "SELECT difficulty_score 
+                  FROM public.cave_ratings 
+                  WHERE user_id = :u AND cave_id = :c";
+                  
+        $result = $this->fetchOne($query, [
+            ':u' => $userId, 
+            ':c' => $caveId
+        ]);
+
+        return $result ? (int)$result['difficulty_score'] : null;
+    }
+
     public function updateStatus(int $caveId, string $status, int $approvedBy): bool
     {
         $query = "UPDATE caves 
