@@ -75,6 +75,26 @@ class CavesController extends AppController {
         http_response_code(400);
     }
 
+    public function rateCave() {
+        if (!isset($_SESSION['user_id'])) {
+            http_response_code(401);
+            echo json_encode(['message' => 'Musisz być zalogowany']);
+            return;
+        }
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $caveId = (int)$data['caveId'];
+        $score = (int)$data['score'];
+
+        if ($score < 1 || $score > 10) {
+            http_response_code(400);
+            return;
+        }
+
+        $success = $this->caveRepository->setCaveRating($_SESSION['user_id'], $caveId, $score);
+        echo json_encode(['success' => $success]);
+    }
+
     public function visit(int $caveId) {
         if (!isset($_SESSION['user_id'])) {
             http_response_code(401);
