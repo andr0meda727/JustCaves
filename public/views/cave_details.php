@@ -18,6 +18,7 @@
     <script src="/public/scripts/markVisit.js" defer></script>
     <script src="/public/scripts/comments.js" defer></script>
     <script src="/public/scripts/navbar.js" defer></script>
+    <script src="/public/scripts/rating.js" defer></script>
   </head>
   <body>
     <?php include 'public/views/partials/navbar.php'; ?>
@@ -76,6 +77,21 @@
           >
         </button>
 
+        <div class="rating-section">
+            <h3>Twoja ocena trudności</h3>
+            <div class="stars-container" id="difficulty-rating" 
+                data-cave-id="<?= $cave->getId() ?>" 
+                data-current-rating="<?= $userRating ?? 0 ?>">
+                <?php for ($i = 1; $i <= 10; $i++): ?>
+                    <span class="star <?= (isset($userRating) && $i <= $userRating) ? 'active' : '' ?>" 
+                          data-value="<?= $i ?>">★</span>
+                <?php endfor; ?>
+            </div>
+            <p id="rating-status">
+                <?= isset($userRating) && $userRating > 0 ? "Twoja ocena: $userRating/10" : "Wybierz poziom trudności (1-10)" ?>
+            </p>
+        </div>
+        
         <div class="comments-section">
           <h3>Komentarze Użytkowników</h3>
 

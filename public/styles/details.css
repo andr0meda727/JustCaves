@@ -201,6 +201,53 @@ p {
   margin: 0.25em 0;
 }
 
+.rating-section {
+  background: var(--panel-overlay);
+  padding: 1.5em;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid #17cf1757;
+}
+
+.rating-section h3 {
+  color: var(--font-color);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.star {
+  font-size: 1.8rem;
+  color: #444;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.star.hovered {
+  color: var(--accent-orange);
+}
+
+.star.active {
+  color: #f1c40f;
+}
+
+.star:active {
+  transform: scale(0.9);
+}
+
+#rating-status {
+  font-size: 0.85rem;
+  color: #93c893;
+  min-height: 1.2em;
+}
+
 @media (max-width: 768px) {
   .details-container {
     flex-direction: column;
