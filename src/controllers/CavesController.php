@@ -25,8 +25,8 @@ class CavesController extends AppController {
         return $this->render("caves", ['caves' => $caves]);
     }
 
-    public function cave(int $id) {
-        $cave = $this->caveRepository->findById($id);
+    public function cave(int $caveId) {
+        $cave = $this->caveRepository->findById($caveId);
 
         if (!$cave) {
             include 'public/views/404.html';
@@ -34,17 +34,21 @@ class CavesController extends AppController {
         }
 
         $isVisited = false;
+        $userCaveRating = null;
+        $isLoggedIn = isset($_SESSION['user_id']);
 
-        if (isset($_SESSION['user_id'])) {
-            $isVisited = $this->caveRepository->isVisited($_SESSION['user_id'], $id);
+        if ($isLoggedIn) {
+            $isVisited = $this->caveRepository->isVisited($_SESSION['user_id'], $caveId);
+            $userCaveRating = $this->caveRepository->getUserRating($_SESSION['user_id'], $caveId);
         }
 
-        $comments = $this->commentRepository->getCommentsByCaveId($id);
+        $comments = $this->commentRepository->getCommentsByCaveId($caveId);
 
         return $this->render("cave_details", [
             'cave' => $cave, 
             'isVisited' => $isVisited,
-            'comments' => $comments
+            'comments' => $comments,
+            'rating' => $userCaveRating
         ]);
     }
 
