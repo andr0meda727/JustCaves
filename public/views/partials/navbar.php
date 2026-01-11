@@ -1,7 +1,7 @@
 <?php
     $isLoggedIn = isset($_SESSION['user_id']);
     $isAdmin = isset($_SESSION['user_id']) && $_SESSION['role_id'] == 3;
-    $currentPage = $_SERVER['REQUEST_URI'];
+    $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 ?>
 
 <nav class="navbar">
@@ -39,7 +39,7 @@
           <?php endif; ?>
 
           <?php if ($isAdmin): ?>
-            <li><a href="/admin" class="admin-link">Panel Administratora</a></li>
+            <li><a href="/admin/caves?page=1" class="admin-link">Panel Administratora</a></li>
           <?php endif; ?>
 
           <li class="nav-icons-container">
