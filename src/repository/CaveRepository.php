@@ -155,6 +155,58 @@ class CaveRepository extends Repository
         return $this->fetchAll($query);
     }
 
+    public function getStatuses(): array
+    {
+        $query = "
+            SELECT enumlabel AS name
+            FROM pg_enum
+            JOIN pg_type ON pg_enum.enumtypid = pg_type.oid
+            WHERE pg_type.typname = 'cave_status_type'
+            ORDER BY enumsortorder
+        ";
+
+        return $this->fetchAll($query);
+    }
+
+
+    public function getAdminCaves(string $status = 'PENDING', int $page = 1, int $limit = 10): array
+    {
+        $offset = ($page - 1) * $limit;
+
+        $query = "
+            SELECT 
+                c.*, 
+                r.name as region_name, 
+                u.username as author_name 
+            FROM caves c
+            LEFT JOIN regions r ON c.region_id = r.id
+            LEFT JOIN users u ON c.author_id = u.id
+            ORDER BY c.created_at DESC
+            LIMIT :limit OFFSET :offset
+        ";
+
+        $results = $this->fetchAll($query, [
+            ':limit' => $limit,
+            ':offset' => $offset
+        ]);
+
+        return array_map(function($row) {
+            $cave = $this->mapToCave($row);
+            if (method_exists($cave, 'setRegionName')) {
+                $cave->setRegionName($row['region_name'] ?? 'Nieznany');
+            }
+            if (method_exists($cave, 'setAuthorName')) {
+                $cave->setAuthorName($row['author_name'] ?? 'Anonim');
+            }
+            return $cave;
+        }, $results);
+    }
+
+    public function getTotalCavesCount(): int
+    {
+        $query = "SELECT COUNT(*) FROM caves";
+        return $this->count($query);
+    }
 
     public function countByStatus(string $status): int
     {
