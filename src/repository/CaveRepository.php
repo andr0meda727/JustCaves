@@ -169,26 +169,39 @@ class CaveRepository extends Repository
     }
 
 
-    public function getAdminCaves(string $status = 'PENDING', int $page = 1, int $limit = 10): array
+    public function getAdminCaves(?string $status, int $page, int $limit, ?int $regionId = null, ?string $search = null): array 
     {
         $offset = ($page - 1) * $limit;
+        $params = [':limit' => $limit, ':offset' => $offset];
+        
+        $where = "WHERE 1=1";
+        
+        if ($status !== null) {
+            $where .= " AND c.status = :status";
+            $params[':status'] = $status;
+        }
+        
+        if ($regionId) {
+            $where .= " AND c.region_id = :region_id";
+            $params[':region_id'] = $regionId;
+        }
+        
+        if ($search) {
+            $where .= " AND c.name ILIKE :search";
+            $params[':search'] = '%' . $search . '%';
+        }
 
         $query = "
-            SELECT 
-                c.*, 
-                r.name as region_name, 
-                u.username as author_name 
+            SELECT c.*, r.name as region_name, u.username as author_name 
             FROM caves c
             LEFT JOIN regions r ON c.region_id = r.id
             LEFT JOIN users u ON c.author_id = u.id
+            $where
             ORDER BY c.created_at DESC
             LIMIT :limit OFFSET :offset
         ";
-
-        $results = $this->fetchAll($query, [
-            ':limit' => $limit,
-            ':offset' => $offset
-        ]);
+        
+        $results = $this->fetchAll($query, $params);
 
         return array_map(function($row) {
             $cave = $this->mapToCave($row);
@@ -202,10 +215,28 @@ class CaveRepository extends Repository
         }, $results);
     }
 
-    public function getTotalCavesCount(): int
+    public function getTotalCavesCount(?string $status, ?int $regionId = null, ?string $search = null): int 
     {
-        $query = "SELECT COUNT(*) FROM caves";
-        return $this->count($query);
+        $params = [];
+        $where = "WHERE 1=1";
+
+        if ($status !== null) {
+            $where .= " AND status = :status";
+            $params[':status'] = $status;
+        }
+
+        if ($regionId) {
+            $where .= " AND region_id = :region_id";
+            $params[':region_id'] = $regionId;
+        }
+
+        if ($search) {
+            $where .= " AND name ILIKE :search";
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        $query = "SELECT COUNT(*) FROM caves $where";
+        return $this->count($query, $params);
     }
 
     public function countByStatus(string $status): int

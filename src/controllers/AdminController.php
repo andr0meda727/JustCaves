@@ -18,17 +18,23 @@ class AdminController extends AppController {
         }
     }
 
-    public function caves() {
+   public function caves() {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        if ($page < 1) $page = 1;
+        $regionId = isset($_GET['region_id']) && $_GET['region_id'] !== '' ? (int)$_GET['region_id'] : null;
+        $search = isset($_GET['search']) && $_GET['search'] !== '' ? $_GET['search'] : null;
+
+        if (isset($_GET['status'])) {
+            $status = ($_GET['status'] === '') ? null : $_GET['status'];
+        } else {
+            $status = 'PENDING';
+        }
 
         $limit = 5;
         
-        $caves = $this->caveRepository->getAdminCaves($page, $limit);
-        $totalCaves = $this->caveRepository->getTotalCavesCount();
+        $caves = $this->caveRepository->getAdminCaves($status, $page, $limit, $regionId, $search);
+        $totalCaves = $this->caveRepository->getTotalCavesCount($status, $regionId, $search);
         $totalPages = ceil($totalCaves / $limit);
         $regions = $this->caveRepository->getRegions();
-        $statuses = $this->caveRepository->getStatuses();
 
         return $this->render('admin/caves', [
             'caves' => $caves,
@@ -36,7 +42,7 @@ class AdminController extends AppController {
             'totalPages' => $totalPages,
             'totalCaves' => $totalCaves,
             'regions' => $regions,
-            'statuses' => $statuses
+            'currentStatus' => $status
         ]);
     }
 

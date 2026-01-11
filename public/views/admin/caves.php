@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/public/styles/main.css">
     <link rel="stylesheet" href="/public/styles/navbar.css">
     <link rel="stylesheet" href="/public/styles/admin/admin.css">
+    <script src="/public/scripts/admin/filter.js" defer></script>
 </head>
 <body class="admin-body">
     <?php include 'public/views/partials/navbar.php'; ?>
@@ -75,26 +76,22 @@
                     <input type="text" placeholder="Szukaj po nazwie, ID...">
                 </div>
                 <div class="select-group">
-                    <select name="region_id" class="region-select" required>
-                        <option value="" disabled selected>Wybierz region...</option>
+                    <select name="region_id" class="region-select">
+                        <option value="">Wszystkie regiony</option>
                         <?php if(isset($regions)): ?>
-                        <?php foreach($regions as $region): ?>
-                        <option value="<?= $region['id']; ?>">
-                        <?= $region['name']; ?>
-                        </option>
-                        <?php endforeach; ?>
+                            <?php foreach($regions as $region): ?>
+                                <option value="<?= $region['id']; ?>" <?= (isset($_GET['region_id']) && $_GET['region_id'] == $region['id']) ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($region['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
 
-                    <select name="status_id" class="status-select" required>
-                        <option value="" disabled selected>Wybierz status...</option>
-                        <?php if(isset($statuses)): ?>
-                        <?php foreach($statuses as $status): ?>
-                        <option value="<?= $status['name']; ?>">
-                        <?= $status['name']; ?>
-                        </option>
-                        <?php endforeach; ?>
-                        <?php endif; ?>
+                    <select name="status" class="status-select">
+                        <option value="" <?= is_null($currentStatus) ? 'selected' : '' ?>>Wszystkie statusy</option>
+                        <option value="PENDING" <?= $currentStatus === 'PENDING' ? 'selected' : '' ?>>Oczekująca</option>
+                        <option value="APPROVED" <?= $currentStatus === 'APPROVED' ? 'selected' : '' ?>>Zatwierdzona</option>
+                        <option value="REJECTED" <?= $currentStatus === 'REJECTED' ? 'selected' : '' ?>>Odrzucona</option>
                     </select>
                 </div>
             </div>
@@ -148,14 +145,22 @@
                 </span>
                 
                 <div class="pagination">
+                    <?php 
+                        $prevParams = $_GET;
+                        $nextParams = $_GET;
+
+                        $prevParams['page'] = $pageNumber - 1;
+                        $nextParams['page'] = $pageNumber + 1;
+                    ?>
+
                     <?php if ($pageNumber > 1): ?>
-                        <a href="/admin/caves?page=<?= $pageNumber - 1 ?>" class="page-btn">Poprzednia</a>
+                        <a href="/admin/caves?<?= http_build_query($prevParams) ?>" class="page-btn">Poprzednia</a>
                     <?php else: ?>
                         <button class="page-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Poprzednia</button>
                     <?php endif; ?>
 
                     <?php if ($pageNumber < $totalPages): ?>
-                        <a href="/admin/caves?page=<?= $pageNumber + 1 ?>" class="page-btn">Następna</a>
+                        <a href="/admin/caves?<?= http_build_query($nextParams) ?>" class="page-btn">Następna</a>
                     <?php else: ?>
                         <button class="page-btn" disabled style="opacity: 0.5; cursor: not-allowed;">Następna</button>
                     <?php endif; ?>
