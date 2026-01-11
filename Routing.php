@@ -43,9 +43,9 @@ class Routing {
             'controller' => 'CavesController',
             'action' => 'rateCave'
         ],
-        'admin' => [
+        'admin/caves' => [
             'controller' => 'AdminController',
-            'action' => 'dashboard'
+            'action' => 'caves'
         ],
         'admin-approve' => [
             'controller' => 'AdminController',
@@ -54,31 +54,31 @@ class Routing {
         'admin-reject' => [
             'controller' => 'AdminController',
             'action' => 'rejectCave'
-        ],
-        'admin-delete' => [
-            'controller' => 'AdminController',
-            'action' => 'deleteCave'
         ]
     ];
 
     public static function run(string $path) {
         $urlParts = explode("/", $path);
 
-        $action = $urlParts[0];
+        $action = $path;
+        $id = null;
 
         if (!array_key_exists($action, self::$routes)) {
-            include 'public/views/404.html';
-            return;
+            $action = $urlParts[0];
+            $id = $urlParts[1] ?? null;
+
+            if (!array_key_exists($action, self::$routes)) {
+                include 'public/views/404.html';
+                return;
+            }
         }
 
         $controller = self::$routes[$action]['controller'];
         $method = self::$routes[$action]['action'];
 
-        $id = $urlParts[1] ?? null;
-
         $object = new $controller;
 
-        if ($id) {
+        if ($id !== null) {
             $object->$method($id);
         } else {
             $object->$method();
