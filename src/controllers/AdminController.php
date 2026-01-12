@@ -48,7 +48,7 @@ class AdminController extends AppController {
 
     public function approveCave(int $caveId) {
         if (!$this->isPost()) {
-            header('Location: /admin');
+            header('Location: /admin/caves');
             exit();
         }
 
@@ -64,13 +64,13 @@ class AdminController extends AppController {
             $_SESSION['admin_error'] = 'Błąd podczas zatwierdzania jaskini';
         }
 
-        header('Location: /admin');
+        header('Location: /admin/caves');
         exit();
     }
 
     public function rejectCave(int $caveId) {
         if (!$this->isPost()) {
-            header('Location: /admin');
+            header('Location: /admin/caves');
             exit();
         }
 
@@ -86,7 +86,7 @@ class AdminController extends AppController {
             $_SESSION['admin_error'] = 'Błąd podczas odrzucania jaskini';
         }
 
-        header('Location: /admin');
+        header('Location: /admin/caves');
         exit();
     }
 }

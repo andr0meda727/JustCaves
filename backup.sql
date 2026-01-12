@@ -28,7 +28,6 @@ CREATE TABLE public.caves (
     latitude numeric(10,8),
     longitude numeric(11,8),
     map_image_path character varying,
-    difficulty_avg numeric,
     author_id integer NOT NULL REFERENCES public.users(id),
     status public.cave_status_type DEFAULT 'PENDING' NOT NULL,
     approved_by integer REFERENCES public.users(id),
@@ -65,6 +64,7 @@ INSERT INTO public.roles (id, name) VALUES
     (2, 'moderator'),
     (3, 'admin')
 ON CONFLICT (id) DO NOTHING;
+
 
 -- Resetowanie liczników sekwencji
 SELECT setval(pg_get_serial_sequence('roles', 'id'), 4, false);

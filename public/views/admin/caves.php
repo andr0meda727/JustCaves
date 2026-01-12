@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="/public/styles/navbar.css">
     <link rel="stylesheet" href="/public/styles/admin/admin.css">
     <script src="/public/scripts/admin/filter.js" defer></script>
+    <script src="/public/scripts/navbar.js" defer></script>
 </head>
 <body class="admin-body">
     <?php include 'public/views/partials/navbar.php'; ?>
     <div class="dashboard-wrapper">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-top">
                 <div class="admin-profile">
                     <div class="avatar">
@@ -120,17 +121,21 @@
                                 ][$statusClass] ?? $statusClass;
                             ?>
                             <tr>
-                                <td><?= $cave->getId() ?></td>
-                                <td class="cave-name"><?= htmlspecialchars($cave->getName()) ?></td>
-                                <td><?= htmlspecialchars($cave->getRegionName() ?? 'Nieznany') ?></td>
-                                <td><span class="status-badge status-<?= $statusClass ?>"><?= $statusLabel ?></span></td>
-                                <td><?= date('Y-m-d') ?></td>
-                                <td class="author-name"><?= htmlspecialchars("abc" ?? 'Anonim') ?></td>
-                                <td class="actions-cell">
-                                    <a href="/cave/<?= $cave->getId() ?>" class="action-btn"><svg viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></a>
-                                    <form action="/admin-delete/<?= $cave->getId() ?>" method="POST" onsubmit="return confirm('Usunąć?')">
-                                        <button class="action-btn delete"><svg viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
-                                    </form>
+                                <td data-label="ID"><?= $cave->getId() ?></td>
+                                <td data-label="Nazwa" class="cave-name"><?= htmlspecialchars($cave->getName()) ?></td>
+                                <td data-label="Region"><?= htmlspecialchars($cave->getRegionName() ?? 'Nieznany') ?></td>
+                                <td data-label="Status"><span class="status-badge status-<?= $statusClass ?>"><?= $statusLabel ?></span></td>
+                                <td data-label="Dodano"><?= date('Y-m-d') ?></td>
+                                <td data-label="Autor" class="author-name"><?= htmlspecialchars("abc" ?? 'Anonim') ?></td>
+                                <td data-label="Akcje" class="actions-cell">
+                                    <div class="actions-wrapper">
+                                        <a href="/cave/<?= $cave->getId() ?>" class="action-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M400-304 240-464l56-56 104 104 264-264 56 56-320 320Z"/></svg>
+                                        </a>
+                                        <form action="/admin-reject/<?= $cave->getId() ?>" method="POST">
+                                            <button class="action-btn delete"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -170,4 +175,5 @@
     </div>
 
 </body>
+
 </html>
