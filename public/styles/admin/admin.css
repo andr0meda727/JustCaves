@@ -274,10 +274,10 @@ table thead th:nth-child(3) {
 }
 
 .actions-cell {
-  text-align: center; /* Centruje zawartość w poziomie */
-  vertical-align: middle; /* Centruje w pionie */
-  white-space: nowrap; /* Wymusza jeden wiersz */
-  width: 100px; /* Stała szerokość kolumny */
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100px;
 }
 
 .action-btn {

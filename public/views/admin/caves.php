@@ -129,9 +129,11 @@
                                 <td data-label="Autor" class="author-name"><?= htmlspecialchars("abc" ?? 'Anonim') ?></td>
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">
-                                        <a href="/cave/<?= $cave->getId() ?>" class="action-btn">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M400-304 240-464l56-56 104 104 264-264 56 56-320 320Z"/></svg>
-                                        </a>
+                                        <form action="/admin-approve/<?= $cave->getId() ?>" method="POST">
+                                            <button class="action-btn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M400-304 240-464l56-56 104 104 264-264 56 56-320 320Z"/></svg>
+                                            </button>
+                                        </form>
                                         <form action="/admin-reject/<?= $cave->getId() ?>" method="POST">
                                             <button class="action-btn delete"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="m336-280-56-56 144-144-144-143 56-56 144 144 143-144 56 56-144 143 144 144-56 56-143-144-144 144Z"/></svg></button>
                                         </form>

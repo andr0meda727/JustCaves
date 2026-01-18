@@ -20,7 +20,7 @@ class CavesController extends AppController {
     }
 
     public function caves() {
-        $caves = $this->caveRepository->findByStatus('PENDING'); // approved
+        $caves = $this->caveRepository->findByStatus('APPROVED'); // approved
 
         return $this->render("caves/caves", ['caves' => $caves]);
     }
