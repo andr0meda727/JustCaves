@@ -58,7 +58,6 @@ CREATE TABLE public.comments (
     created_at date NOT NULL DEFAULT CURRENT_DATE
 );
 
--- Wstawianie podstawowych ról
 INSERT INTO public.roles (id, name) VALUES 
     (1, 'user'),
     (2, 'moderator'),
@@ -66,5 +65,19 @@ INSERT INTO public.roles (id, name) VALUES
 ON CONFLICT (id) DO NOTHING;
 
 
--- Resetowanie liczników sekwencji
-SELECT setval(pg_get_serial_sequence('roles', 'id'), 4, false);
+INSERT INTO public.regions (name, description) VALUES 
+    ('Tatry', 'Najwyższe góry w Polsce, posiadające najgłębsze i najdłuższe jaskinie krasowe.'),
+    ('Góry Świętokrzyskie', 'Region z jaskiniami takimi jak Jaskinia Raj, charakteryzujący się specyficzną budową geologiczną.'),
+    ('Wyżyna Krakowsko-Częstochowska', 'Jura, słynąca z tysięcy mniejszych jaskiń i schronisk w wapieniach jurajskich.'),
+    ('Sudety', 'Góry z jaskiniami takimi jak Jaskinia Niedźwiedzia, jedne z najstarszych w Polsce.'),
+    ('Pieniny', 'Region wapienny z mniejszymi, ale urokliwymi jaskiniami.');
+
+
+INSERT INTO public.users (username, email, password_hash, role_id) VALUES 
+    ('admin', 'admin@justcaves.com', '$2y$10$vY3tYfN18jZ9I.7hU6X7GeA0Y4Jq4Rj/5h7L4Q0L5N/8D2G8O6hH.', 3)
+ON CONFLICT (username) DO NOTHING;
+
+
+SELECT setval(pg_get_serial_sequence('roles', 'id'), (SELECT MAX(id) FROM public.roles));
+SELECT setval(pg_get_serial_sequence('regions', 'id'), (SELECT MAX(id) FROM public.regions));
+SELECT setval(pg_get_serial_sequence('users', 'id'), (SELECT MAX(id) FROM public.users));
