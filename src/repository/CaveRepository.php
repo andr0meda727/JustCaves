@@ -259,7 +259,8 @@ class CaveRepository extends Repository
             $row['longitude'] ?? null,
             $row['map_image_path'] ?? null,
             $row['difficulty_avg'] ?? null,
-            $row['status'] ?? 'PENDING'
+            $row['status'] ?? 'PENDING',
+            $row['created_at']
         );
     }
 }

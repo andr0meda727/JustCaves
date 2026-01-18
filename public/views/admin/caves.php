@@ -125,7 +125,7 @@
                                 <td data-label="Nazwa" class="cave-name"><?= htmlspecialchars($cave->getName()) ?></td>
                                 <td data-label="Region"><?= htmlspecialchars($cave->getRegionName() ?? 'Nieznany') ?></td>
                                 <td data-label="Status"><span class="status-badge status-<?= $statusClass ?>"><?= $statusLabel ?></span></td>
-                                <td data-label="Dodano"><?= date('Y-m-d') ?></td>
+                                <td data-label="Dodano"><?= $cave->getCreatedAt() ?? 'No date' ?></td>
                                 <td data-label="Autor" class="author-name"><?= htmlspecialchars($cave->getAuthorName()) ?></td>
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">

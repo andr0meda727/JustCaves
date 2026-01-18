@@ -13,6 +13,8 @@ class Cave {
     private string $status;
     private ?string $regionName;
     private ?string $authorName;
+    private ?string $createdAt;
+
 
     public function __construct(
         string $name,
@@ -24,7 +26,8 @@ class Cave {
         ?float $longitude = null,
         ?string $mapImagePath = null,
         ?float $difficultyAvg = null,
-        string $status = 'PENDING'
+        string $status = 'PENDING',
+        ?string $createdAt = null
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -36,6 +39,7 @@ class Cave {
         $this->mapImagePath = $mapImagePath;
         $this->difficultyAvg = $difficultyAvg;
         $this->status = $status;
+        $this->createdAt = $createdAt;
     }
 
     public function getId(): ?int { return $this->id; }
@@ -50,6 +54,7 @@ class Cave {
     public function getStatus(): string { return $this->status; }
     public function getRegionName(): ?string { return $this->regionName; }
     public function getAuthorName(): ?string { return $this->authorName; }
+    public function getCreatedAt(): ?string { return $this->createdAt; }
 
     public function setId(int $id): void { $this->id = $id; }
     public function setName(string $name): void { $this->name = $name; }
@@ -61,4 +66,5 @@ class Cave {
     public function setStatus(string $status): void { $this->status = $status; }
     public function setRegionName(string $regionName): void { $this->regionName = $regionName; }
     public function setAuthorName(string $authorName): void { $this->authorName = $authorName; }
+    public function setCreatedAt(string $createdAt): void { $this->createdAt = $createdAt; }
 }
