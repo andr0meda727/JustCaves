@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/public/styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="/public/styles/details.css" />
-    <link rel="stylesheet" href="/public/styles/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/public/styles/caves/details.css" />
+    <link rel="stylesheet" href="/public/styles/partials/navbar.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"

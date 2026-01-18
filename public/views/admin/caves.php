@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administratora - JustCaves</title>
     <link rel="stylesheet" href="/public/styles/main.css">
-    <link rel="stylesheet" href="/public/styles/navbar.css">
+    <link rel="stylesheet" href="/public/styles/partials/navbar.css">
     <link rel="stylesheet" href="/public/styles/admin/admin.css">
     <script src="/public/scripts/admin/filter.js" defer></script>
     <script src="/public/scripts/navbar.js" defer></script>

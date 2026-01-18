@@ -6,8 +6,8 @@
     <title>JustCaves - Dodaj nową jaskinię</title>
 
     <link rel="stylesheet" href="public/styles/main.css" />
-    <link rel="stylesheet" href="public/styles/addCave.css" />
-    <link rel="stylesheet" href="public/styles/navbar.css" />
+    <link rel="stylesheet" href="public/styles/caves/addCave.css" />
+    <link rel="stylesheet" href="public/styles/partials/navbar.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
