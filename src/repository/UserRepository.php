@@ -46,15 +46,46 @@ class UserRepository extends Repository
         }
     }
 
-    public function findByEmail(string $email): ?User
+    public function getPaginatedUsers(string $searchTerm, int $page, int $limit): array
     {
-        $query = "SELECT id, username, email, password_hash, role_id, created_at 
-                  FROM users 
-                  WHERE email = :email";
+        $offset = ($page - 1) * $limit;
+        $search = "%$searchTerm%";
 
-        $result = $this->fetchOne($query, [':email' => $email]);
+        $query = "SELECT * FROM users 
+                  WHERE username ILIKE :search OR email ILIKE :search 
+                  ORDER BY id DESC 
+                  LIMIT :limit OFFSET :offset";
 
-        return $result ? $this->mapToUser($result) : null;
+        $results = $this->fetchAll($query, [
+            ':search' => $search,
+            ':limit' => $limit,
+            ':offset' => $offset
+        ]);
+
+        $users = [];
+        foreach ($results as $row) {
+            $users[] = $this->mapToUser($row);
+        }
+
+        return $users;
+    }
+
+    public function getTotalUserCount(string $searchTerm): int
+    {
+        $search = "%$searchTerm%";
+        $query = "SELECT COUNT(*) FROM users WHERE username ILIKE :search OR email ILIKE :search";
+        
+        $result = $this->fetchOne($query, [':search' => $search]);
+        return (int)$result['count'];
+    }
+
+    public function updateRole(int $userId, int $roleId): bool
+    {
+        $query = "UPDATE users SET role_id = :role_id WHERE id = :id";
+        return $this->execute($query, [
+            ':role_id' => $roleId,
+            ':id' => $userId
+        ]); 
     }
 
     public function findByUsername(string $username): ?User
@@ -84,24 +115,6 @@ class UserRepository extends Repository
         );
     }
 
-    public function update(User $user): bool
-    {
-        $query = "UPDATE users 
-                  SET username = :username, 
-                      email = :email, 
-                      password_hash = :password_hash,
-                      role_id = :role_id
-                  WHERE id = :id";
-
-        return $this->execute($query, [
-            ':username' => $user->getUsername(),
-            ':email' => $user->getEmail(),
-            ':password_hash' => $user->getPasswordHash(),
-            ':role_id' => $user->getRoleId(),
-            ':id' => $user->getId()
-        ]);
-    }
-
     public function delete(int $id): bool
     {
         return $this->execute(
@@ -109,7 +122,6 @@ class UserRepository extends Repository
             [':id' => $id]
         );
     }
-
 
     private function mapToUser(array $row): User
     {
