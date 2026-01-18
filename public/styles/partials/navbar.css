@@ -2,10 +2,12 @@
   --accent-green: #17cf17;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .navbar {
-  padding: 0.5rem 2rem;
-  display: flex;
-  justify-content: center;
+  padding: 0.5rem 0;
   border-bottom: 2px solid #0e880e23;
   position: relative;
 }
@@ -16,8 +18,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .nav-links {
@@ -84,7 +86,7 @@
   align-items: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .navbar {
     padding: 1rem;
   }
@@ -167,21 +169,6 @@
 
   .nav-icons-container > .profile-icon {
     display: none;
-  }
-}
-
-@media (max-width: 500px) {
-  .logo-header h1 {
-    font-size: 1.2rem;
-  }
-
-  .logo-header svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .hamburger-menu span {
-    height: 2px;
   }
 }
 

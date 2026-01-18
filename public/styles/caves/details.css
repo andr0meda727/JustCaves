@@ -248,12 +248,12 @@ p {
   min-height: 1.2em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .details-container {
     flex-direction: column;
     margin: 20px auto;
     gap: 30px;
-    padding: 0 15px;
+    padding: 0 20px;
     align-items: center;
     width: 90%;
   }
