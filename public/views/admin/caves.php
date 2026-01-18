@@ -126,7 +126,7 @@
                                 <td data-label="Region"><?= htmlspecialchars($cave->getRegionName() ?? 'Nieznany') ?></td>
                                 <td data-label="Status"><span class="status-badge status-<?= $statusClass ?>"><?= $statusLabel ?></span></td>
                                 <td data-label="Dodano"><?= date('Y-m-d') ?></td>
-                                <td data-label="Autor" class="author-name"><?= htmlspecialchars("abc" ?? 'Anonim') ?></td>
+                                <td data-label="Autor" class="author-name"><?= htmlspecialchars($cave->getAuthorName()) ?></td>
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">
                                         <form action="/cave/<?= $cave->getId() ?>" method="GET">

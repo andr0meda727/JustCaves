@@ -12,6 +12,7 @@ class Cave {
     private int $authorId;
     private string $status;
     private ?string $regionName;
+    private ?string $authorName;
 
     public function __construct(
         string $name,
@@ -48,6 +49,7 @@ class Cave {
     public function getDifficultyAvg(): ?float { return $this->difficultyAvg; }
     public function getStatus(): string { return $this->status; }
     public function getRegionName(): ?string { return $this->regionName; }
+    public function getAuthorName(): ?string { return $this->authorName; }
 
     public function setId(int $id): void { $this->id = $id; }
     public function setName(string $name): void { $this->name = $name; }
@@ -58,4 +60,5 @@ class Cave {
     public function setMapImagePath(?string $mapImagePath): void { $this->mapImagePath = $mapImagePath; }
     public function setStatus(string $status): void { $this->status = $status; }
     public function setRegionName(string $regionName): void { $this->regionName = $regionName; }
+    public function setAuthorName(string $authorName): void { $this->authorName = $authorName; }
 }
