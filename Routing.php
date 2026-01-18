@@ -2,7 +2,8 @@
 
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/CavesController.php';
-require_once 'src/controllers/AdminController.php';
+require_once 'src/controllers/AdminCavesController.php';
+require_once 'src/controllers/AdminUsersController.php';
 
 
 class Routing {
@@ -44,17 +45,29 @@ class Routing {
             'action' => 'rateCave'
         ],
         'admin/caves' => [
-            'controller' => 'AdminController',
+            'controller' => 'AdminCavesController',
             'action' => 'caves'
         ],
         'admin-approve' => [
-            'controller' => 'AdminController',
+            'controller' => 'AdminCavesController',
             'action' => 'approveCave'
         ],
         'admin-reject' => [
-            'controller' => 'AdminController',
+            'controller' => 'AdminCavesController',
             'action' => 'rejectCave'
-        ]
+        ],
+        'admin/users' => [
+            'controller' => 'AdminUsersController',
+            'action' => 'users'
+        ],
+        'admin-promote' => [
+            'controller' => 'AdminUsersController',
+            'action' => 'promote'
+        ],
+        'admin-delete-user' => [
+            'controller' => 'AdminUsersController',
+            'action' => 'deleteUser'
+        ],
     ];
 
     public static function run(string $path) {
