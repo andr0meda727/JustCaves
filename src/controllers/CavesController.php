@@ -33,6 +33,12 @@ class CavesController extends AppController {
             return;
         }
 
+        $isAdmin = isset($_SESSION['role_id']) && $_SESSION['role_id'] == 3;
+        if ($cave->getStatus() !== 'APPROVED' && !$isAdmin) {
+            include 'public/views/error/404.html'; // add 403 forbidden later
+            return;
+        }
+
         $isVisited = false;
         $userCaveRating = null;
         $isLoggedIn = isset($_SESSION['user_id']);
