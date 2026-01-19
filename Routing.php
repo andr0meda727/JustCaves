@@ -4,6 +4,7 @@ require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/CavesController.php';
 require_once 'src/controllers/AdminCavesController.php';
 require_once 'src/controllers/AdminUsersController.php';
+require_once 'src/controllers/ProfileController.php';
 
 
 class Routing {
@@ -72,6 +73,10 @@ class Routing {
             'controller' => 'AdminUsersController',
             'action' => 'deleteUser'
         ],
+        'profile' => [
+            'controller' => 'ProfileController',
+            'action' => 'profile'
+        ]
     ];
 
     public static function run(string $path) {

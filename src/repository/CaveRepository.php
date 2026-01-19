@@ -54,6 +54,35 @@ class CaveRepository extends Repository
         }
     }
 
+    public function getUserVisitedCaves(int $userId): array
+    {
+        $query = "
+            SELECT 
+                c.*, 
+                r.name as region_name,
+                rat.difficulty_score as user_rating
+            FROM caves c
+            JOIN cave_visits cv ON c.id = cv.cave_id
+            LEFT JOIN regions r ON c.region_id = r.id
+            LEFT JOIN cave_ratings rat ON (c.id = rat.cave_id AND rat.user_id = :userId)
+            WHERE cv.user_id = :userId
+            ORDER BY c.name ASC
+        ";
+
+        $results = $this->fetchAll($query, [':userId' => $userId]);
+
+        return array_map(function($row) {
+            $cave = $this->mapToCave($row);
+            // Przekazujemy dodatkowe dane do obiektu lub tablicy
+            $cave->setRegionName($row['region_name'] ?? 'Nieznany');
+            // Możesz dodać pole rating do klasy Cave lub zwrócić to jako tablicę asocjacyjną
+            return [
+                'details' => $cave,
+                'rating' => $row['user_rating']
+            ];
+        }, $results);
+    }
+
     public function findById(int $id): ?Cave
     {
         $query = "SELECT c.*, r.name as region_name 

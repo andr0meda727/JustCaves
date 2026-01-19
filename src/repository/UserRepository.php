@@ -88,6 +88,17 @@ class UserRepository extends Repository
         ]); 
     }
 
+    public function findById(int $id): ?User
+    {
+        $query = "SELECT id, username, email, password_hash, role_id, created_at 
+            FROM users 
+            WHERE id = :id";
+
+        $result = $this->fetchOne($query, [':id' => $id]);
+
+        return $result ? $this->mapToUser($result) : null;
+    }
+
     public function findByUsername(string $username): ?User
     {
         $query = "SELECT id, username, email, password_hash, role_id, created_at 
