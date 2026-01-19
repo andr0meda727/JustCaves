@@ -165,10 +165,10 @@ class CaveRepository extends Repository
 
     public function updateStatus(int $caveId, string $status, int $approvedBy): bool
     {
+        // Trigger updates "updated_at" date
         $query = "UPDATE caves 
                   SET status = :status, 
-                      approved_by = :approved_by,
-                      updated_at = NOW()
+                    approved_by = :approved_by
                   WHERE id = :id";
 
         return $this->execute($query, [
@@ -202,31 +202,17 @@ class CaveRepository extends Repository
     {
         $offset = ($page - 1) * $limit;
         $params = [':limit' => $limit, ':offset' => $offset];
-        
         $where = "WHERE 1=1";
         
         if ($status !== null) {
-            $where .= " AND c.status = :status";
+            $where .= " AND status = :status";
             $params[':status'] = $status;
-        }
-        
-        if ($regionId) {
-            $where .= " AND c.region_id = :region_id";
-            $params[':region_id'] = $regionId;
-        }
-        
-        if ($search) {
-            $where .= " AND c.name ILIKE :search";
-            $params[':search'] = '%' . $search . '%';
         }
 
         $query = "
-            SELECT c.*, r.name as region_name, u.username as author_name 
-            FROM caves c
-            LEFT JOIN regions r ON c.region_id = r.id
-            LEFT JOIN users u ON c.author_id = u.id
+            SELECT * FROM v_caves_details
             $where
-            ORDER BY c.created_at DESC
+            ORDER BY created_at DESC
             LIMIT :limit OFFSET :offset
         ";
         

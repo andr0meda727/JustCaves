@@ -51,10 +51,11 @@ class UserRepository extends Repository
         $offset = ($page - 1) * $limit;
         $search = "%$searchTerm%";
 
-        $query = "SELECT * FROM users 
-                  WHERE username ILIKE :search OR email ILIKE :search 
-                  ORDER BY id DESC 
-                  LIMIT :limit OFFSET :offset";
+        // View v_user_activity contains all needed data
+        $query = "SELECT * FROM v_user_activity 
+                WHERE username ILIKE :search OR email ILIKE :search 
+                ORDER BY id DESC 
+                LIMIT :limit OFFSET :offset";
 
         $results = $this->fetchAll($query, [
             ':search' => $search,

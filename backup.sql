@@ -81,3 +81,47 @@ ON CONFLICT (username) DO NOTHING;
 SELECT setval(pg_get_serial_sequence('roles', 'id'), (SELECT MAX(id) FROM public.roles));
 SELECT setval(pg_get_serial_sequence('regions', 'id'), (SELECT MAX(id) FROM public.regions));
 SELECT setval(pg_get_serial_sequence('users', 'id'), (SELECT MAX(id) FROM public.users));
+
+-- Oblicza średnią ocenę jaskini na podstawie tabeli cave_ratings
+CREATE OR REPLACE FUNCTION get_cave_avg_rating(p_cave_id INT)
+RETURNS NUMERIC AS $$
+BEGIN
+    RETURN (SELECT ROUND(AVG(difficulty_score), 1) FROM public.cave_ratings WHERE cave_id = p_cave_id);
+END;
+$$ LANGUAGE plpgsql;
+
+-- Pełne informacje o jaskiniach
+CREATE OR REPLACE VIEW v_caves_details AS
+SELECT 
+    c.*, 
+    r.name AS region_name, 
+    u.username AS author_name,
+    get_cave_avg_rating(c.id) AS calculated_rating
+FROM public.caves c
+LEFT JOIN public.regions r ON c.region_id = r.id
+LEFT JOIN public.users u ON c.author_id = u.id;
+
+-- Statystyki użytkowników
+CREATE OR REPLACE VIEW v_user_activity AS
+SELECT 
+    u.id, 
+    u.username, 
+    u.email, 
+    u.role_id,
+    u.created_at,
+    (SELECT COUNT(*) FROM public.cave_visits cv WHERE cv.user_id = u.id) AS visited_count
+FROM public.users u;
+
+-- 4. FUNKCJA I WYZWALACZ (TRIGGER): Automatyczna aktualizacja daty 'updated_at'
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tr_caves_updated_at
+BEFORE UPDATE ON public.caves
+FOR EACH ROW
+EXECUTE PROCEDURE update_updated_at_column();
