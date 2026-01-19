@@ -48,9 +48,20 @@ class AdminUsersController extends AppController
         }
     }
 
-    public function deleteUser(int $id)
+    public function demote(int $id)
     {
         if (!$this->isAdmin()) {
+            die("Wymagane uprawnienia administratora");
+        }
+
+        if ($this->userRepository->updateRole($id, 1)) {
+            header("Location: /admin/users" . ($this->getBackParams()));
+        }
+    }
+
+    public function deleteUser(int $id)
+    {
+        if (!$this->isAtLeastModerator()) {
             die("Brak uprawnień");
         }
 
@@ -69,5 +80,9 @@ class AdminUsersController extends AppController
     {
         // role_id == 3 (admin)
         return isset($_SESSION['role_id']) && $_SESSION['role_id'] == 3;
+    }
+
+    private function isAtLeastModerator(): bool {
+        return isset($_SESSION['role_id']) && $_SESSION['role_id'] >= 2;
     }
 }

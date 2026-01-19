@@ -94,19 +94,32 @@
                                 </td>
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">
-                                        <?php if($user->getRoleId() == 1): ?>
-                                        <form action="/admin-promote/<?= $user->getId() ?>" method="POST">
-                                            <button title="Daj uprawnienia moderatora" class="action-btn promote">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm34-102 102-44 102 44 56-96 110-24-10-114 74-84-74-84 10-114-110-24-56-96-102 44-102-44-56 96-110 24 10 114-74 84 74 84-10 114 110 24 56 96Zm102-318Zm-42 142 226-226-56-58-170 170-86-84-56 56 142 142Z"/></svg>
-                                            </button>
-                                        </form>
+                                        <?php if($_SESSION['role_id'] == 3):  ?>
+                                            <?php if($user->getRoleId() == 1): ?>
+                                                <form action="/admin-promote/<?= $user->getId() ?>" method="POST">
+                                                    <button title="Awansuj na Moderatora" class="action-btn promote">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#17cf17"><path d="m296-224-56-56 240-240 240 240-56 56-184-183-184 183Zm0-240-56-56 240-240 240 240-56 56-184-183-184 183Z"/></svg>
+                                                    </button>
+                                                </form>
+                                            <?php endif; ?>
+
+                                            <?php if($user->getRoleId() == 2): ?>
+                                                <form action="/admin-demote/<?= $user->getId() ?>" method="POST">
+                                                    <button title="Degraduj do Użytkownika" class="action-btn demote">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffca7a"><path d="M480-200 240-440l56-56 184 183 184-183 56 56-240 240Zm0-240L240-680l56-56 184 183 184-183 56 56-240 240Z"/></svg>
+                                                    </button>
+                                                </form>
+                                            <?php endif; ?>
+
                                         <?php endif; ?>
-                                        
-                                        <form action="/admin-delete-user/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz trwale usunąć tego użytkownika? Operacji nie można cofnąć.');">
-                                            <button title="Usuń konto użytkownika" class="action-btn delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T760-120H280Zm480-600H280v520h480v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-                                            </button>
-                                        </form>
+                                            
+                                        <?php if($user->getRoleId() != 3):  ?>
+                                            <form action="/admin-delete-user/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Usunąć konto?')">
+                                                <button title="Usuń konto" class="action-btn delete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff4444"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T760-120H280Zm480-600H280v520h480v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                             </tr>

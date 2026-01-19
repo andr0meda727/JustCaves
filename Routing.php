@@ -64,6 +64,10 @@ class Routing {
             'controller' => 'AdminUsersController',
             'action' => 'promote'
         ],
+        'admin-demote' => [
+            'controller' => 'AdminUsersController',
+            'action' => 'demote'
+        ],
         'admin-delete-user' => [
             'controller' => 'AdminUsersController',
             'action' => 'deleteUser'
