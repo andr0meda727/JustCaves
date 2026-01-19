@@ -95,14 +95,14 @@
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">
                                         <?php if($user->getRoleId() == 1): ?>
-                                        <form action="/admin/promote/<?= $user->getId() ?>" method="POST">
+                                        <form action="/admin-promote/<?= $user->getId() ?>" method="POST">
                                             <button title="Daj uprawnienia moderatora" class="action-btn promote">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m344-60-76-128-144-32 14-148-98-112 98-112-14-148 144-32 76-128 136 58 136-58 76 128 144 32-14 148 98 112-98 112 14 148-144 32-76 128-136-58-136 58Zm34-102 102-44 102 44 56-96 110-24-10-114 74-84-74-84 10-114-110-24-56-96-102 44-102-44-56 96-110 24 10 114-74 84 74 84-10 114 110 24 56 96Zm102-318Zm-42 142 226-226-56-58-170 170-86-84-56 56 142 142Z"/></svg>
                                             </button>
                                         </form>
                                         <?php endif; ?>
                                         
-                                        <form action="/admin/users/delete/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz trwale usunąć tego użytkownika? Operacji nie można cofnąć zgodnie z RODO.');">
+                                        <form action="/admin-delete-user/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz trwale usunąć tego użytkownika? Operacji nie można cofnąć.');">
                                             <button title="Usuń konto użytkownika" class="action-btn delete">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T760-120H280Zm480-600H280v520h480v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                                             </button>

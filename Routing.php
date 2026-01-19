@@ -81,7 +81,7 @@ class Routing {
             $id = $urlParts[1] ?? null;
 
             if (!array_key_exists($action, self::$routes)) {
-                include 'public/views/404.html';
+                include 'public/views/error/404.html';
                 return;
             }
         }
