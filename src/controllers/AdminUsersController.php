@@ -6,7 +6,7 @@ require_once __DIR__ . '/../repository/UserRepository.php';
 class AdminUsersController extends AppController
 {
     private $userRepository;
-    private const USERS_PER_PAGE = 10;
+    private const USERS_PER_PAGE = 6;
 
     public function __construct()
     {

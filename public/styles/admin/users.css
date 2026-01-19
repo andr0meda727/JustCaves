@@ -1,0 +1,129 @@
+.admin-body {
+  overflow: hidden;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 40px;
+  box-sizing: border-box;
+}
+
+.role-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Administrator */
+.role-3 {
+  background: rgba(23, 207, 23, 0.15);
+  color: #17cf17;
+  border: 1px solid rgba(23, 207, 23, 0.3);
+}
+
+/* Moderator */
+.role-2 {
+  background: rgba(52, 152, 219, 0.15);
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+/* User */
+.role-1 {
+  background: rgba(255, 255, 255, 0.05);
+  color: #a0a0a0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn.promote {
+  color: #3498db;
+}
+
+.action-btn.promote:hover {
+  color: #5dade2;
+  transform: scale(1.1);
+}
+
+.action-btn.delete {
+  color: #e74c3c;
+}
+
+.action-btn.delete:hover {
+  color: #ff5e5e;
+  transform: scale(1.1);
+}
+
+.user-name-cell {
+  color: var(--accent-green);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Stylizacja stopki tabeli i paginacji */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-color);
+}
+
+.results-info {
+  font-size: 0.9rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.page-btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.page-btn:hover:not([disabled]) {
+  border-color: var(--accent-green);
+  background: rgba(23, 207, 23, 0.1);
+}
+
+.page-btn.active {
+  background: var(--accent-green);
+  color: #000;
+  border-color: var(--accent-green);
+  font-weight: bold;
+}
+
+.page-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .table-footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
