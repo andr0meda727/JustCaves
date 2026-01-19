@@ -1,6 +1,8 @@
 <?php
     $isLoggedIn = isset($_SESSION['user_id']);
-    $isAdmin = isset($_SESSION['user_id']) && $_SESSION['role_id'] == 3;
+
+    $roleId = $_SESSION['role_id'] ?? 0;
+    $isAtLeastModerator = $isLoggedIn && $roleId >= 2;
     $currentPage = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 ?>
 
@@ -25,8 +27,9 @@
       <?php if ($isLoggedIn): ?>
         <li><a href="/addCave">Dodaj jaskinię</a></li>
 
-        <?php if ($isAdmin): ?>
-          <li><a href="/admin/caves?page=1" class="admin-link">Panel Administratora</a></li>
+        <?php if ($isAtLeastModerator): ?>
+          <li class="admin-mobile-only"><a href="/admin/caves?page=1">Zarządzanie Jaskiniami</a></li>
+          <li class="admin-mobile-only"><a href="/admin/users">Zarządzanie Użytkownikami</a></li>
         <?php endif; ?>
 
         <li><a href="/profile">Mój profil</a></li>
