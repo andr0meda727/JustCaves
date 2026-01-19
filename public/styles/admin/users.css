@@ -63,7 +63,6 @@
   font-weight: 500;
 }
 
-/* Stylizacja stopki tabeli i paginacji */
 .table-footer {
   display: flex;
   justify-content: space-between;
@@ -113,6 +112,13 @@
   opacity: 0.4;
   cursor: not-allowed;
   background: transparent;
+}
+
+@media screen and (max-width: 1350px) {
+  .admin-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 @media (max-width: 768px) {
