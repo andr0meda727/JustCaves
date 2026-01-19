@@ -8,11 +8,11 @@ class AdminCavesController extends AppController {
 
     public function __construct() {
         $this->caveRepository = CaveRepository::getInstance();
-        $this->checkAdminAccess();
+        $this->checkAtLeastModeratorAccess();
     }
 
-    private function checkAdminAccess() {
-        if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 3) {
+    private function checkAtLeastModeratorAccess() {
+        if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] < 2) {
             header('Location: /login');
             exit();
         }

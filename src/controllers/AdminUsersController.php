@@ -15,7 +15,7 @@ class AdminUsersController extends AppController
 
     public function users()
     {
-        if (!$this->isAdmin()) {
+        if (!$this->isAtLeastModerator()) {
             header('Location: /login');
             exit();
         }
@@ -63,6 +63,23 @@ class AdminUsersController extends AppController
     {
         if (!$this->isAtLeastModerator()) {
             die("Brak uprawnień");
+        }
+
+        $currentUserRole = $_SESSION['role_id'];
+        $targetUser = $this->userRepository->findById($id);
+
+        if (!$targetUser) {
+            die("Użytkownik nie istnieje");
+        }
+
+        // Moderator (2) może usuwać TYLKO zwykłych użytkowników (1)
+        if ($currentUserRole == 2 && $targetUser->getRoleId() != 1) {
+            die("Moderator może usuwać tylko zwykłych użytkowników.");
+        }
+
+        // Admin (3) może usuwać Użytkowników (1) i Moderatorów (2), ale nie innych Adminów (3)
+        if ($currentUserRole == 3 && $targetUser->getRoleId() == 3) {
+            die("Nie można usunąć konta administratora.");
         }
 
         if ($this->userRepository->delete($id)) {

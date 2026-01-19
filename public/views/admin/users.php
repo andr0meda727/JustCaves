@@ -94,27 +94,38 @@
                                 </td>
                                 <td data-label="Akcje" class="actions-cell">
                                     <div class="actions-wrapper">
-                                        <?php if($_SESSION['role_id'] == 3):  ?>
-                                            <?php if($user->getRoleId() == 1): ?>
+                                        <?php 
+                                            $myRole = $_SESSION['role_id'];
+                                            $targetRole = $user->getRoleId();
+                                        ?>
+
+                                        <?php if($myRole == 3): ?>
+                                            <?php if($targetRole == 1): // Użytkownik -> Moderator ?>
                                                 <form action="/admin-promote/<?= $user->getId() ?>" method="POST">
                                                     <button title="Awansuj na Moderatora" class="action-btn promote">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#17cf17"><path d="m296-224-56-56 240-240 240 240-56 56-184-183-184 183Zm0-240-56-56 240-240 240 240-56 56-184-183-184 183Z"/></svg>
                                                     </button>
                                                 </form>
-                                            <?php endif; ?>
-
-                                            <?php if($user->getRoleId() == 2): ?>
+                                            <?php elseif($targetRole == 2): // Moderator -> Użytkownik ?>
                                                 <form action="/admin-demote/<?= $user->getId() ?>" method="POST">
                                                     <button title="Degraduj do Użytkownika" class="action-btn demote">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffca7a"><path d="M480-200 240-440l56-56 184 183 184-183 56 56-240 240Zm0-240L240-680l56-56 184 183 184-183 56 56-240 240Z"/></svg>
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
-
                                         <?php endif; ?>
-                                            
-                                        <?php if($user->getRoleId() != 3):  ?>
-                                            <form action="/admin-delete-user/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Usunąć konto?')">
+
+                                        <?php 
+                                            $canDelete = false;
+                                            if ($myRole == 3 && $targetRole != 3) {
+                                                $canDelete = true; // Admin usuwa Mod i User
+                                            } elseif ($myRole == 2 && $targetRole == 1) {
+                                                $canDelete = true; // Moderator usuwa tylko User
+                                            }
+                                        ?>
+
+                                        <?php if($canDelete): ?>
+                                            <form action="/admin-delete-user/<?= $user->getId() ?>" method="POST" onsubmit="return confirm('Czy na pewno chcesz trwale usunąć to konto?')">
                                                 <button title="Usuń konto" class="action-btn delete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff4444"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T760-120H280Zm480-600H280v520h480v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
                                                 </button>
